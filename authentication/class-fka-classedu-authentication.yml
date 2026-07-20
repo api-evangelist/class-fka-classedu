@@ -1,0 +1,54 @@
+generated: '2026-07-18'
+method: searched
+source: openapi/class-fka-classedu-openapi.yml
+docs: https://developer.class.com/
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  model: api-key-bearer-with-scopes
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  in: header
+  header: Authorization
+  format: 'Authorization: Bearer <api_key_secret>'
+  description: >-
+    Per-organization API key presented as a Bearer token in the Authorization
+    header. The key secret is displayed only once, at key creation, in the Class
+    Admin UI API Keys page (which is also where the organization's unique base
+    URL is shown). Each key is granted a set of permission scopes; selecting a
+    write scope automatically grants the matching read scope.
+  sources:
+  - openapi/class-fka-classedu-openapi.yml
+scopes:
+- scope: class:read
+  description: Read class information.
+- scope: class:write
+  description: Create, update and remove classes (implies class:read).
+- scope: enrollment:read
+  description: Read enrollment information and launch links.
+- scope: enrollment:write
+  description: Create, update and remove enrollments (implies enrollment:read).
+- scope: attendance:read
+  description: Read attendance reporting.
+- scope: metrics:read
+  description: Read engagement metrics reporting.
+- scope: schedule:read
+  description: Read class dates / schedules.
+- scope: schedule:write
+  description: Add and remove class dates (implies schedule:read).
+- scope: template:read
+  description: Read class templates.
+- scope: template:write
+  description: Create, update and remove class templates (implies template:read).
+- scope: user:read
+  description: Read non-learner users.
+- scope: user:write
+  description: Create, update and remove non-learner users (implies user:read).
+notes:
+- >-
+  Scopes are attached to the API key rather than issued via an OAuth flow; this
+  is API-key authorization with a scope model, not OAuth 2.0.
