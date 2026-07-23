@@ -1,0 +1,116 @@
+openapi: 3.1.0
+info:
+  title: Class Developer Classes Launch API
+  version: v1
+  x-apievangelist-provenance:
+    generated: '2026-07-18'
+    method: generated
+    source: https://developer.class.com/
+    note: Faithful OpenAPI reconstruction of the operations, paths, HTTP methods, authentication scheme, permission scopes, pagination model and documented request fields published on developer.class.com. Request/response object schemas capture only fields named in the public documentation; no fields were invented. This is an API Evangelist generated spec, not a Class-published artifact.
+  description: REST API for Class (fka ClassEDU), the virtual classroom platform built for Zoom and Microsoft Teams. The API lets administrators and integrators provision classes, manage enrollments, generate learner launch links, schedule class dates, manage reusable class templates, manage non-learner users, and pull attendance and engagement reporting. Authentication uses a per-organization API key presented as a Bearer token, gated by permission scopes.
+  contact:
+    name: Class Developer Platform
+    url: https://developer.class.com/
+  termsOfService: https://www.class.com/terms-of-service/
+servers:
+- url: https://{organization}.class.com
+  description: Base URL is unique to each organization and is retrieved from the API Keys page in the Class Admin UI after an API key is created.
+  variables:
+    organization:
+      default: your-organization
+      description: Your organization's Class subdomain.
+security:
+- bearerAuth: []
+tags:
+- name: Launch
+  description: Generate a one-time access link for a learner to join a class.
+paths:
+  /api/v1/class/enrollments/launch:
+    get:
+      operationId: getLaunchLink
+      summary: Get a Launch Link
+      description: Generate an access link for an enrolled learner to join a class.
+      tags:
+      - Launch
+      security:
+      - bearerAuth:
+        - enrollment:read
+      parameters:
+      - $ref: '#/components/parameters/ClassId'
+      - $ref: '#/components/parameters/ExtClassId'
+      responses:
+        '200':
+          $ref: '#/components/responses/LaunchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable explanation of the failure.
+    Launch:
+      type: object
+      properties:
+        launch_url:
+          type: string
+          format: uri
+  responses:
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    LaunchResponse:
+      description: A learner launch link.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Launch'
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    ExtClassId:
+      name: ext_class_id
+      in: query
+      description: External class identifier supplied by the integrator.
+      required: false
+      schema:
+        type: string
+    ClassId:
+      name: class_id
+      in: query
+      description: Class identifier assigned by Class.
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Per-organization API key presented as a Bearer token in the Authorization header (Authorization: Bearer <api_key_secret>). The key secret is shown only once, at key creation, in the Admin UI. Each key is granted a set of permission scopes; selecting a write scope automatically grants the matching read scope. Documented scopes: class:read, class:write, enrollment:read, enrollment:write, attendance:read, metrics:read, schedule:read, schedule:write, template:read, template:write, user:read, user:write.'
