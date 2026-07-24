@@ -1,0 +1,48 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/class-fka-classedu-openapi.yml
+entities:
+- name: Class
+  identifiers: [class_id, ext_class_id, class_deferred_id]
+  description: A virtual class, optionally created from a template.
+- name: Enrollment
+  identifiers: [student_id, ext_person_id, email]
+  description: A learner's enrollment in a class.
+- name: Schedule
+  identifiers: [schedule_id, session_id]
+  description: A scheduled class date / session.
+- name: Template
+  identifiers: [template_id]
+  description: A reusable class template.
+- name: User
+  identifiers: [id, ext_user_id, email]
+  description: A non-learner user (instructor, admin).
+relationships:
+- from: Class
+  to: Template
+  type: belongs_to
+  via: template_id
+  cardinality: many-to-one
+- from: Enrollment
+  to: Class
+  type: belongs_to
+  via: class_id
+  cardinality: many-to-one
+- from: Schedule
+  to: Class
+  type: belongs_to
+  via: class_id
+  cardinality: many-to-one
+- from: Class
+  to: Enrollment
+  type: has_many
+  via: class_id
+- from: Class
+  to: Schedule
+  type: has_many
+  via: class_id
+- from: Class
+  to: User
+  type: has_many
+  via: additional_instructors
+  notes: Instructors are attached to a class via additional_instructors.

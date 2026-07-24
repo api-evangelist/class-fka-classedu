@@ -1,0 +1,12 @@
+generated: '2026-07-18'
+method: generated
+source: openapi/class-fka-classedu-openapi.yml
+skills:
+- file: class-fka-classedu-provision-and-enroll.md
+  name: Provision a class and enroll a learner
+  api: openapi/class-fka-classedu-openapi.yml
+  operations: [createClass, createEnrollment, getLaunchLink]
+- file: class-fka-classedu-attendance-reporting.md
+  name: Pull attendance and engagement reporting for a class
+  api: openapi/class-fka-classedu-openapi.yml
+  operations: [getClasses, getAttendance, getMetrics]

@@ -1,0 +1,754 @@
+openapi: 3.1.0
+info:
+  title: Class Developer API
+  version: v1
+  x-apievangelist-provenance:
+    generated: '2026-07-18'
+    method: generated
+    source: https://developer.class.com/
+    note: >-
+      Faithful OpenAPI reconstruction of the operations, paths, HTTP methods,
+      authentication scheme, permission scopes, pagination model and documented
+      request fields published on developer.class.com. Request/response object
+      schemas capture only fields named in the public documentation; no fields
+      were invented. This is an API Evangelist generated spec, not a
+      Class-published artifact.
+  description: >-
+    REST API for Class (fka ClassEDU), the virtual classroom platform built for
+    Zoom and Microsoft Teams. The API lets administrators and integrators
+    provision classes, manage enrollments, generate learner launch links,
+    schedule class dates, manage reusable class templates, manage non-learner
+    users, and pull attendance and engagement reporting. Authentication uses a
+    per-organization API key presented as a Bearer token, gated by permission
+    scopes.
+  contact:
+    name: Class Developer Platform
+    url: https://developer.class.com/
+  termsOfService: https://www.class.com/terms-of-service/
+servers:
+  - url: https://{organization}.class.com
+    description: >-
+      Base URL is unique to each organization and is retrieved from the API Keys
+      page in the Class Admin UI after an API key is created.
+    variables:
+      organization:
+        default: your-organization
+        description: Your organization's Class subdomain.
+security:
+  - bearerAuth: []
+tags:
+  - name: Classes
+    description: Create, read, update and remove classes.
+  - name: Enrollments
+    description: Enroll learners into classes and manage their enrollment records.
+  - name: Launch
+    description: Generate a one-time access link for a learner to join a class.
+  - name: Reporting
+    description: Attendance and engagement metrics reporting.
+  - name: Schedules
+    description: Manage the scheduled dates (sessions) for a class.
+  - name: Templates
+    description: Manage reusable class templates.
+  - name: Users
+    description: Manage non-learner users (instructors, admins).
+paths:
+  /api/v1/classes:
+    post:
+      operationId: createClass
+      summary: Create a Class
+      description: Create a new class, optionally from a template.
+      tags: [Classes]
+      security:
+        - bearerAuth: [class:write]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClassCreate'
+      responses:
+        '201': { $ref: '#/components/responses/ClassResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '500': { $ref: '#/components/responses/ServerError' }
+        '503': { $ref: '#/components/responses/ServiceUnavailable' }
+    get:
+      operationId: getClasses
+      summary: Get class information
+      description: >-
+        Retrieve information for all classes, or a single class when a
+        class_id or ext_class_id is supplied.
+      tags: [Classes]
+      security:
+        - bearerAuth: [class:read]
+      parameters:
+        - $ref: '#/components/parameters/ClassId'
+        - $ref: '#/components/parameters/ExtClassId'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200': { $ref: '#/components/responses/ClassListResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    patch:
+      operationId: updateClass
+      summary: Update a Class
+      tags: [Classes]
+      security:
+        - bearerAuth: [class:write]
+      parameters:
+        - $ref: '#/components/parameters/ClassId'
+        - $ref: '#/components/parameters/ExtClassId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClassUpdate'
+      responses:
+        '200': { $ref: '#/components/responses/ClassResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    delete:
+      operationId: deleteClass
+      summary: Remove a Class
+      tags: [Classes]
+      security:
+        - bearerAuth: [class:write]
+      parameters:
+        - $ref: '#/components/parameters/ClassId'
+        - $ref: '#/components/parameters/ExtClassId'
+      responses:
+        '200': { $ref: '#/components/responses/Deleted' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /api/v1/class/enrollments:
+    post:
+      operationId: createEnrollment
+      summary: Create an Enrollment
+      tags: [Enrollments]
+      security:
+        - bearerAuth: [enrollment:write]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollmentCreate'
+      responses:
+        '201': { $ref: '#/components/responses/EnrollmentResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    get:
+      operationId: getEnrollments
+      summary: Get Enrollments
+      tags: [Enrollments]
+      security:
+        - bearerAuth: [enrollment:read]
+      parameters:
+        - $ref: '#/components/parameters/ClassId'
+        - $ref: '#/components/parameters/ExtClassId'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200': { $ref: '#/components/responses/EnrollmentListResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    put:
+      operationId: updateEnrollment
+      summary: Update an Enrollment
+      tags: [Enrollments]
+      security:
+        - bearerAuth: [enrollment:write]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollmentCreate'
+      responses:
+        '200': { $ref: '#/components/responses/EnrollmentResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    delete:
+      operationId: deleteEnrollment
+      summary: Remove an Enrollment
+      tags: [Enrollments]
+      security:
+        - bearerAuth: [enrollment:write]
+      parameters:
+        - $ref: '#/components/parameters/ClassId'
+        - $ref: '#/components/parameters/ExtClassId'
+      responses:
+        '200': { $ref: '#/components/responses/Deleted' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /api/v1/class/enrollments/launch:
+    get:
+      operationId: getLaunchLink
+      summary: Get a Launch Link
+      description: Generate an access link for an enrolled learner to join a class.
+      tags: [Launch]
+      security:
+        - bearerAuth: [enrollment:read]
+      parameters:
+        - $ref: '#/components/parameters/ClassId'
+        - $ref: '#/components/parameters/ExtClassId'
+      responses:
+        '200': { $ref: '#/components/responses/LaunchResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /api/v1/reporting/attendance:
+    get:
+      operationId: getAttendance
+      summary: Get Attendance
+      tags: [Reporting]
+      security:
+        - bearerAuth: [attendance:read]
+      parameters:
+        - $ref: '#/components/parameters/ClassId'
+        - $ref: '#/components/parameters/ExtClassId'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200': { $ref: '#/components/responses/ReportResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+  /api/v1/reporting/metrics:
+    get:
+      operationId: getMetrics
+      summary: Get Metrics
+      tags: [Reporting]
+      security:
+        - bearerAuth: [metrics:read]
+      parameters:
+        - $ref: '#/components/parameters/ClassId'
+        - $ref: '#/components/parameters/ExtClassId'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200': { $ref: '#/components/responses/ReportResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+  /api/v1/schedules:
+    post:
+      operationId: addClassDate
+      summary: Add a Class Date
+      tags: [Schedules]
+      security:
+        - bearerAuth: [schedule:write]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleCreate'
+      responses:
+        '201': { $ref: '#/components/responses/ScheduleResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    get:
+      operationId: getClassDates
+      summary: Get Class Dates
+      tags: [Schedules]
+      security:
+        - bearerAuth: [schedule:read]
+      parameters:
+        - $ref: '#/components/parameters/ClassId'
+        - $ref: '#/components/parameters/ExtClassId'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200': { $ref: '#/components/responses/ScheduleListResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    delete:
+      operationId: removeClassDate
+      summary: Remove a Class Date
+      tags: [Schedules]
+      security:
+        - bearerAuth: [schedule:write]
+      parameters:
+        - $ref: '#/components/parameters/ScheduleId'
+      responses:
+        '200': { $ref: '#/components/responses/Deleted' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /api/v1/templates:
+    post:
+      operationId: createTemplate
+      summary: Create a Template
+      tags: [Templates]
+      security:
+        - bearerAuth: [template:write]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateCreate'
+      responses:
+        '201': { $ref: '#/components/responses/TemplateResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+    get:
+      operationId: getTemplates
+      summary: Get templates
+      description: Get all templates, or a single template by template_id.
+      tags: [Templates]
+      security:
+        - bearerAuth: [template:read]
+      parameters:
+        - $ref: '#/components/parameters/TemplateId'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200': { $ref: '#/components/responses/TemplateListResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    patch:
+      operationId: updateTemplate
+      summary: Update a Template
+      tags: [Templates]
+      security:
+        - bearerAuth: [template:write]
+      parameters:
+        - $ref: '#/components/parameters/TemplateId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateCreate'
+      responses:
+        '200': { $ref: '#/components/responses/TemplateResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    delete:
+      operationId: deleteTemplate
+      summary: Remove a Template
+      tags: [Templates]
+      security:
+        - bearerAuth: [template:write]
+      parameters:
+        - $ref: '#/components/parameters/TemplateId'
+      responses:
+        '200': { $ref: '#/components/responses/Deleted' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /api/v1/users:
+    put:
+      operationId: upsertUser
+      summary: Create or Update a User
+      tags: [Users]
+      security:
+        - bearerAuth: [user:write]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpsert'
+      responses:
+        '200': { $ref: '#/components/responses/UserResponse' }
+        '201': { $ref: '#/components/responses/UserResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+    get:
+      operationId: getUsers
+      summary: Get users
+      description: Get all users, or a single user by id or ext_user_id.
+      tags: [Users]
+      security:
+        - bearerAuth: [user:read]
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/ExtUserId'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200': { $ref: '#/components/responses/UserListResponse' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    delete:
+      operationId: deleteUser
+      summary: Remove a User
+      tags: [Users]
+      security:
+        - bearerAuth: [user:write]
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/ExtUserId'
+      responses:
+        '200': { $ref: '#/components/responses/Deleted' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Per-organization API key presented as a Bearer token in the
+        Authorization header (Authorization: Bearer <api_key_secret>). The key
+        secret is shown only once, at key creation, in the Admin UI. Each key is
+        granted a set of permission scopes; selecting a write scope
+        automatically grants the matching read scope. Documented scopes:
+        class:read, class:write, enrollment:read, enrollment:write,
+        attendance:read, metrics:read, schedule:read, schedule:write,
+        template:read, template:write, user:read, user:write.
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: Page number to retrieve (positive integer).
+      required: false
+      schema: { type: integer, minimum: 1, default: 1 }
+    Limit:
+      name: limit
+      in: query
+      description: Records per page (1-1000).
+      required: false
+      schema: { type: integer, minimum: 1, maximum: 1000, default: 100 }
+    ClassId:
+      name: class_id
+      in: query
+      description: Class identifier assigned by Class.
+      required: false
+      schema: { type: string }
+    ExtClassId:
+      name: ext_class_id
+      in: query
+      description: External class identifier supplied by the integrator.
+      required: false
+      schema: { type: string }
+    ScheduleId:
+      name: schedule_id
+      in: query
+      description: Schedule (class date) identifier.
+      required: false
+      schema: { type: string }
+    TemplateId:
+      name: template_id
+      in: query
+      description: Template identifier.
+      required: false
+      schema: { type: string }
+    UserId:
+      name: id
+      in: query
+      description: User identifier assigned by Class.
+      required: false
+      schema: { type: string }
+    ExtUserId:
+      name: ext_user_id
+      in: query
+      description: External user identifier supplied by the integrator.
+      required: false
+      schema: { type: string }
+  schemas:
+    Pagination:
+      type: object
+      properties:
+        total_records: { type: integer }
+        current_page: { type: integer }
+        total_pages: { type: integer }
+        next_page: { type: [integer, 'null'] }
+        prev_page: { type: [integer, 'null'] }
+    SessionTime:
+      type: object
+      properties:
+        start_time: { type: integer, description: Unix time. }
+        end_time: { type: integer, description: Unix time. }
+    ClassSettings:
+      type: object
+      properties:
+        waiting_room: { type: boolean }
+        join_before_host: { type: boolean }
+        jbh_time: { type: integer }
+    Instructor:
+      type: object
+      properties:
+        email: { type: string, format: email }
+        user_name: { type: string }
+    TrackingField:
+      type: object
+      properties:
+        field: { type: string }
+        value: { type: string }
+    ClassCreate:
+      type: object
+      required: [class_name]
+      properties:
+        email: { type: string, format: email }
+        first_name: { type: string }
+        last_name: { type: string }
+        display_name: { type: string }
+        ext_class_id: { type: string }
+        class_name: { type: string }
+        class_description: { type: string }
+        template_id: { type: string }
+        meeting_passcode: { type: string }
+        timezone: { type: string, description: Time Zone ID. }
+        session_times:
+          type: array
+          items: { $ref: '#/components/schemas/SessionTime' }
+        settings: { $ref: '#/components/schemas/ClassSettings' }
+        additional_instructors:
+          type: array
+          items: { $ref: '#/components/schemas/Instructor' }
+        tracking_fields:
+          type: array
+          items: { $ref: '#/components/schemas/TrackingField' }
+    ClassUpdate:
+      allOf:
+        - $ref: '#/components/schemas/ClassCreate'
+    Class:
+      type: object
+      properties:
+        class_id: { type: string }
+        ext_class_id: { type: string }
+        class_deferred_id: { type: string }
+        class_name: { type: string }
+        class_description: { type: string }
+        timezone: { type: string }
+    EnrollmentCreate:
+      type: object
+      properties:
+        class_id: { type: string }
+        ext_class_id: { type: string }
+        ext_person_id: { type: string }
+        email: { type: string, format: email }
+        first_name: { type: string }
+        last_name: { type: string }
+        role: { type: string }
+        display_name: { type: string }
+    Enrollment:
+      type: object
+      properties:
+        student_id: { type: string }
+        ext_person_id: { type: string }
+        email: { type: string, format: email }
+        class_id: { type: string }
+        role: { type: string }
+    Launch:
+      type: object
+      properties:
+        launch_url: { type: string, format: uri }
+    ScheduleCreate:
+      type: object
+      required: [class_id, start_time, end_time]
+      properties:
+        class_id: { type: string }
+        start_time: { type: integer, description: Unix time. }
+        end_time: { type: integer, description: Unix time. }
+        timezone: { type: string, deprecated: true, description: Time Zone ID (deprecated). }
+    Schedule:
+      type: object
+      properties:
+        schedule_id: { type: string }
+        session_id: { type: string }
+        class_id: { type: string }
+        start_time: { type: integer }
+        end_time: { type: integer }
+    TemplateCreate:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string }
+        description: { type: string }
+        status: { type: string }
+    Template:
+      type: object
+      properties:
+        template_id: { type: string }
+        name: { type: string }
+        description: { type: string }
+        status: { type: string }
+    UserUpsert:
+      type: object
+      properties:
+        identified_by: { type: string, description: Which identifier the request keys on (id or ext_user_id). }
+        id: { type: string }
+        ext_user_id: { type: string }
+        email: { type: string, format: email }
+        user_name: { type: string }
+        roles:
+          type: array
+          items: { type: string }
+    User:
+      type: object
+      properties:
+        id: { type: string }
+        ext_user_id: { type: string }
+        email: { type: string, format: email }
+        user_name: { type: string }
+        roles:
+          type: array
+          items: { type: string }
+    Report:
+      type: object
+      properties:
+        data:
+          type: array
+          items: { type: object, additionalProperties: true }
+        pagination: { $ref: '#/components/schemas/Pagination' }
+    Error:
+      type: object
+      properties:
+        message: { type: string, description: Human-readable explanation of the failure. }
+  responses:
+    ClassResponse:
+      description: A class.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Class' }
+    ClassListResponse:
+      description: A page of classes.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: { $ref: '#/components/schemas/Class' }
+              pagination: { $ref: '#/components/schemas/Pagination' }
+    EnrollmentResponse:
+      description: An enrollment.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Enrollment' }
+    EnrollmentListResponse:
+      description: A page of enrollments.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: { $ref: '#/components/schemas/Enrollment' }
+              pagination: { $ref: '#/components/schemas/Pagination' }
+    LaunchResponse:
+      description: A learner launch link.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Launch' }
+    ReportResponse:
+      description: A reporting result set.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Report' }
+    ScheduleResponse:
+      description: A class date.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Schedule' }
+    ScheduleListResponse:
+      description: A page of class dates.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: { $ref: '#/components/schemas/Schedule' }
+              pagination: { $ref: '#/components/schemas/Pagination' }
+    TemplateResponse:
+      description: A template.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Template' }
+    TemplateListResponse:
+      description: A page of templates.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: { $ref: '#/components/schemas/Template' }
+              pagination: { $ref: '#/components/schemas/Pagination' }
+    UserResponse:
+      description: A user.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/User' }
+    UserListResponse:
+      description: A page of users.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: { $ref: '#/components/schemas/User' }
+              pagination: { $ref: '#/components/schemas/Pagination' }
+    Deleted:
+      description: The resource was removed.
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    NotFound:
+      description: Not Found.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    ServerError:
+      description: Internal Server Error.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    ServiceUnavailable:
+      description: Service Unavailable.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }

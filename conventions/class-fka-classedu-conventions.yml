@@ -1,0 +1,57 @@
+generated: '2026-07-18'
+method: searched
+source: https://developer.class.com/
+authentication:
+  style: api-key-bearer
+  header: Authorization
+  format: 'Bearer <api_key_secret>'
+  scopes: authentication/class-fka-classedu-authentication.yml
+idempotency:
+  supported: false
+  notes: >-
+    No idempotency-key header or documented idempotency contract was found in
+    the developer documentation. Create/update semantics rely on the caller's
+    own identifiers (ext_class_id, ext_person_id, ext_user_id) and on PUT-style
+    upserts (users, enrollments) for repeatability rather than an
+    Idempotency-Key.
+pagination:
+  style: page-number
+  params:
+  - name: page
+    description: Page number to retrieve (positive integer).
+  - name: limit
+    description: Records per page, 1-1000.
+  response_fields:
+  - total_records
+  - current_page
+  - total_pages
+  - next_page
+  - prev_page
+  notes: Available on select list endpoints.
+identifiers:
+  notes: >-
+    Most resources accept multiple identifiers - a Class-assigned id or an
+    integrator-supplied external id - so callers can address records by either.
+  fields:
+    class: [class_id, ext_class_id, class_deferred_id]
+    enrollment: [student_id, ext_person_id, email]
+    user: [id, ext_user_id, email]
+    template: [template_id]
+    schedule: [schedule_id, session_id]
+time:
+  notes: Scheduling uses Unix Time for timestamps and Time Zone IDs for zones.
+versioning:
+  style: uri-path
+  current: v1
+  base_path: /api/v1
+  see: lifecycle/class-fka-classedu-lifecycle.yml
+errors:
+  envelope: json
+  see: errors/class-fka-classedu-problem-types.yml
+rate_limiting:
+  signaled: unknown
+  notes: No rate-limit headers or quota policy documented in the public docs.
+cross_links:
+  authentication: authentication/class-fka-classedu-authentication.yml
+  errors: errors/class-fka-classedu-problem-types.yml
+  lifecycle: lifecycle/class-fka-classedu-lifecycle.yml

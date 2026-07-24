@@ -1,0 +1,34 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/class-fka-classedu-openapi.yml
+standards:
+- id: oauth2
+  conforms: false
+  evidence: Authentication is API-key Bearer with scopes, not an OAuth 2.0 flow.
+- id: oidc
+  conforms: false
+- id: api-key-auth
+  conforms: true
+  evidence: http bearer securityScheme (per-organization API key) applied to all operations.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors are HTTP status codes with a JSON message body, not application/problem+json.
+- id: pagination
+  conforms: true
+  evidence: page/limit query params with total_records/current_page/total_pages/next_page/prev_page.
+- id: idempotency
+  conforms: false
+  evidence: No Idempotency-Key contract documented.
+- id: json-api
+  conforms: false
+- id: fhir
+  conforms: false
+- id: scim
+  conforms: false
+compliance_programs:
+- id: soc2
+  status: certified
+  source: https://trust.class.com/
+- id: iso27001
+  status: certified
+  source: https://trust.class.com/

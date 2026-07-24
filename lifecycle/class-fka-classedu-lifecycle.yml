@@ -1,0 +1,26 @@
+generated: '2026-07-18'
+method: searched
+source: https://developer.class.com/
+versioning:
+  scheme: uri-path
+  current: v1
+  base_path: /api/v1
+  docs: https://developer.class.com/
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  notes: >-
+    No formal deprecation or Sunset/Deprecation-header policy is published. One
+    field-level deprecation is documented in the spec: the schedule "timezone"
+    field is marked deprecated.
+sla:
+  url: null
+  uptime_target: null
+  notes: >-
+    No public SLA document. The status page reports rolling 90-day uptime of
+    99.97%-100% across components.
+status_page: https://status.class.com/
+status_provider: Atlassian Statuspage
+deprecated_operations: []
+deprecated_fields:
+- openapi/class-fka-classedu-openapi.yml#/components/schemas/ScheduleCreate/properties/timezone

@@ -1,0 +1,26 @@
+{
+  "provider": "class-fka-classedu",
+  "sources": [
+    "class-fka-classedu-classes-api-openapi.yml",
+    "class-fka-classedu-enrollments-api-openapi.yml",
+    "class-fka-classedu-launch-api-openapi.yml",
+    "class-fka-classedu-reporting-api-openapi.yml",
+    "class-fka-classedu-schedules-api-openapi.yml",
+    "class-fka-classedu-templates-api-openapi.yml",
+    "class-fka-classedu-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "class-fka-classedu-classes-api-openapi.yml",
+    "class-fka-classedu-enrollments-api-openapi.yml",
+    "class-fka-classedu-launch-api-openapi.yml",
+    "class-fka-classedu-reporting-api-openapi.yml",
+    "class-fka-classedu-schedules-api-openapi.yml",
+    "class-fka-classedu-templates-api-openapi.yml",
+    "class-fka-classedu-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

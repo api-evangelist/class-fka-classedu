@@ -1,0 +1,35 @@
+generated: '2026-07-18'
+method: searched
+source: https://developer.class.com/
+format: http-status
+envelope: json
+notes: >-
+  Class documents HTTP status codes for API responses with a JSON error body
+  that explains validation failures or permission issues. The docs do not
+  publish an RFC 9457 problem+json contract or a numbered error-code registry;
+  these are the documented status-code classes derived from the API reference.
+problems:
+- status: 400
+  title: Bad Request
+  meaning: The request failed validation (missing or malformed fields).
+  action: Correct the request body or query parameters and retry.
+- status: 401
+  title: Unauthorized
+  meaning: The API key is missing or invalid.
+  action: Provide a valid Bearer API key in the Authorization header.
+- status: 403
+  title: Forbidden
+  meaning: The API key does not carry the scope required for the endpoint.
+  action: Grant the required scope to the API key (for example class:write).
+- status: 404
+  title: Not Found
+  meaning: The addressed resource (class, enrollment, user, template, schedule) does not exist.
+  action: Verify the identifier (id or external id) and retry.
+- status: 500
+  title: Internal Server Error
+  meaning: An unexpected server-side error occurred.
+  action: Retry later; contact Class support if it persists.
+- status: 503
+  title: Service Unavailable
+  meaning: The service is temporarily unavailable.
+  action: Retry with backoff; check https://status.class.com/.
