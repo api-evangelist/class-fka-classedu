@@ -183,7 +183,7 @@ common:
 - type: Demo
   url: https://www.class.com/demo/
 - type: OpenAPI
-  url: openapi/class-fka-classedu-openapi.yml
+  url: openapi/_original/class-fka-classedu-openapi.yml
 - type: Conventions
   url: conventions/class-fka-classedu-conventions.yml
 - type: ErrorCatalog
