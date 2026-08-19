@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Class Developer Classes Reporting API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reporting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Attendance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{organization}.class.com/api/v1/reporting/attendance",
+            "params": [
+              {
+                "name": "class_id",
+                "value": "",
+                "type": "query",
+                "description": "Class identifier assigned by Class."
+              },
+              {
+                "name": "ext_class_id",
+                "value": "",
+                "type": "query",
+                "description": "External class identifier supplied by the integrator."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to retrieve (positive integer)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Records per page (1-1000)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Attendance"
+        },
+        {
+          "info": {
+            "name": "Get Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{organization}.class.com/api/v1/reporting/metrics",
+            "params": [
+              {
+                "name": "class_id",
+                "value": "",
+                "type": "query",
+                "description": "Class identifier assigned by Class."
+              },
+              {
+                "name": "ext_class_id",
+                "value": "",
+                "type": "query",
+                "description": "External class identifier supplied by the integrator."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to retrieve (positive integer)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Records per page (1-1000)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Metrics"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

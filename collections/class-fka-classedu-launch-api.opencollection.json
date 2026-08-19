@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Class Developer Classes Launch API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Launch",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a Launch Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{organization}.class.com/api/v1/class/enrollments/launch",
+            "params": [
+              {
+                "name": "class_id",
+                "value": "",
+                "type": "query",
+                "description": "Class identifier assigned by Class."
+              },
+              {
+                "name": "ext_class_id",
+                "value": "",
+                "type": "query",
+                "description": "External class identifier supplied by the integrator."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Generate an access link for an enrolled learner to join a class."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

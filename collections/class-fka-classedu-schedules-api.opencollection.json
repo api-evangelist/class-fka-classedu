@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Class Developer Classes Schedules API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Schedules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Class Dates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{organization}.class.com/api/v1/schedules",
+            "params": [
+              {
+                "name": "class_id",
+                "value": "",
+                "type": "query",
+                "description": "Class identifier assigned by Class."
+              },
+              {
+                "name": "ext_class_id",
+                "value": "",
+                "type": "query",
+                "description": "External class identifier supplied by the integrator."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to retrieve (positive integer)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Records per page (1-1000)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Class Dates"
+        },
+        {
+          "info": {
+            "name": "Add a Class Date",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{organization}.class.com/api/v1/schedules",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add a Class Date"
+        },
+        {
+          "info": {
+            "name": "Remove a Class Date",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{organization}.class.com/api/v1/schedules",
+            "params": [
+              {
+                "name": "schedule_id",
+                "value": "",
+                "type": "query",
+                "description": "Schedule (class date) identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Remove a Class Date"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

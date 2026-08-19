@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Class Developer Classes Enrollments API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Enrollments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Enrollments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{organization}.class.com/api/v1/class/enrollments",
+            "params": [
+              {
+                "name": "class_id",
+                "value": "",
+                "type": "query",
+                "description": "Class identifier assigned by Class."
+              },
+              {
+                "name": "ext_class_id",
+                "value": "",
+                "type": "query",
+                "description": "External class identifier supplied by the integrator."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to retrieve (positive integer)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Records per page (1-1000)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Enrollments"
+        },
+        {
+          "info": {
+            "name": "Create an Enrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{organization}.class.com/api/v1/class/enrollments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create an Enrollment"
+        },
+        {
+          "info": {
+            "name": "Update an Enrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{organization}.class.com/api/v1/class/enrollments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an Enrollment"
+        },
+        {
+          "info": {
+            "name": "Remove an Enrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{organization}.class.com/api/v1/class/enrollments",
+            "params": [
+              {
+                "name": "class_id",
+                "value": "",
+                "type": "query",
+                "description": "Class identifier assigned by Class."
+              },
+              {
+                "name": "ext_class_id",
+                "value": "",
+                "type": "query",
+                "description": "External class identifier supplied by the integrator."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Remove an Enrollment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

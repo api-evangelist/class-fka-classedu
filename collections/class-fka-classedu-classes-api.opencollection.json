@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Class Developer Classes API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Classes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get class information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{organization}.class.com/api/v1/classes",
+            "params": [
+              {
+                "name": "class_id",
+                "value": "",
+                "type": "query",
+                "description": "Class identifier assigned by Class."
+              },
+              {
+                "name": "ext_class_id",
+                "value": "",
+                "type": "query",
+                "description": "External class identifier supplied by the integrator."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to retrieve (positive integer)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Records per page (1-1000)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve information for all classes, or a single class when a class_id or ext_class_id is supplied."
+        },
+        {
+          "info": {
+            "name": "Create a Class",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{organization}.class.com/api/v1/classes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new class, optionally from a template."
+        },
+        {
+          "info": {
+            "name": "Update a Class",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{organization}.class.com/api/v1/classes",
+            "params": [
+              {
+                "name": "class_id",
+                "value": "",
+                "type": "query",
+                "description": "Class identifier assigned by Class."
+              },
+              {
+                "name": "ext_class_id",
+                "value": "",
+                "type": "query",
+                "description": "External class identifier supplied by the integrator."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a Class"
+        },
+        {
+          "info": {
+            "name": "Remove a Class",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{organization}.class.com/api/v1/classes",
+            "params": [
+              {
+                "name": "class_id",
+                "value": "",
+                "type": "query",
+                "description": "Class identifier assigned by Class."
+              },
+              {
+                "name": "ext_class_id",
+                "value": "",
+                "type": "query",
+                "description": "External class identifier supplied by the integrator."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Remove a Class"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

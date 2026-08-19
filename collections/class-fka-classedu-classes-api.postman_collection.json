@@ -1,0 +1,1619 @@
+{
+  "item": [
+    {
+      "id": "ab97b070-bed7-4242-974b-2027a74a9e28",
+      "name": "Classes",
+      "description": {
+        "content": "Create, read, update and remove classes.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5580f9c1-c79a-46a6-863e-8fba7c192597",
+          "name": "Create a Class",
+          "request": {
+            "name": "Create a Class",
+            "description": {
+              "content": "Create a new class, optionally from a template.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "classes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your organization's Class subdomain.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"class_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"ext_class_id\": \"<string>\",\n  \"class_description\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"meeting_passcode\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"session_times\": [\n    {\n      \"start_time\": \"<integer>\",\n      \"end_time\": \"<integer>\"\n    },\n    {\n      \"start_time\": \"<integer>\",\n      \"end_time\": \"<integer>\"\n    }\n  ],\n  \"settings\": {\n    \"waiting_room\": \"<boolean>\",\n    \"join_before_host\": \"<boolean>\",\n    \"jbh_time\": \"<integer>\"\n  },\n  \"additional_instructors\": [\n    {\n      \"email\": \"<email>\",\n      \"user_name\": \"<string>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"user_name\": \"<string>\"\n    }\n  ],\n  \"tracking_fields\": [\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "29d36c35-d744-45ad-8fd7-2063ca7af1e9",
+              "name": "A class.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"class_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"ext_class_id\": \"<string>\",\n  \"class_description\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"meeting_passcode\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"session_times\": [\n    {\n      \"start_time\": 5440,\n      \"end_time\": 1036\n    },\n    {\n      \"start_time\": 8491,\n      \"end_time\": 7059\n    }\n  ],\n  \"settings\": {\n    \"waiting_room\": false,\n    \"join_before_host\": true,\n    \"jbh_time\": 8395\n  },\n  \"additional_instructors\": [\n    {\n      \"email\": \"nvhEsFfR8a@diXxlMyLHWpdc.hsi\",\n      \"user_name\": \"string\"\n    },\n    {\n      \"email\": \"CV5Kg@zZdNWEunMr.tpw\",\n      \"user_name\": \"string\"\n    }\n  ],\n  \"tracking_fields\": [\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"class_id\": \"string\",\n  \"ext_class_id\": \"string\",\n  \"class_deferred_id\": \"string\",\n  \"class_name\": \"string\",\n  \"class_description\": \"string\",\n  \"timezone\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c03a12d-1759-43c5-850f-eb49f6c26cb9",
+              "name": "Bad Request - validation failed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"class_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"ext_class_id\": \"<string>\",\n  \"class_description\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"meeting_passcode\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"session_times\": [\n    {\n      \"start_time\": 5440,\n      \"end_time\": 1036\n    },\n    {\n      \"start_time\": 8491,\n      \"end_time\": 7059\n    }\n  ],\n  \"settings\": {\n    \"waiting_room\": false,\n    \"join_before_host\": true,\n    \"jbh_time\": 8395\n  },\n  \"additional_instructors\": [\n    {\n      \"email\": \"nvhEsFfR8a@diXxlMyLHWpdc.hsi\",\n      \"user_name\": \"string\"\n    },\n    {\n      \"email\": \"CV5Kg@zZdNWEunMr.tpw\",\n      \"user_name\": \"string\"\n    }\n  ],\n  \"tracking_fields\": [\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57ef14de-c6fe-464b-a03a-68923cc5ceb8",
+              "name": "Unauthorized - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"class_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"ext_class_id\": \"<string>\",\n  \"class_description\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"meeting_passcode\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"session_times\": [\n    {\n      \"start_time\": 5440,\n      \"end_time\": 1036\n    },\n    {\n      \"start_time\": 8491,\n      \"end_time\": 7059\n    }\n  ],\n  \"settings\": {\n    \"waiting_room\": false,\n    \"join_before_host\": true,\n    \"jbh_time\": 8395\n  },\n  \"additional_instructors\": [\n    {\n      \"email\": \"nvhEsFfR8a@diXxlMyLHWpdc.hsi\",\n      \"user_name\": \"string\"\n    },\n    {\n      \"email\": \"CV5Kg@zZdNWEunMr.tpw\",\n      \"user_name\": \"string\"\n    }\n  ],\n  \"tracking_fields\": [\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "611c5da8-661c-40e7-8778-ed252648874f",
+              "name": "Forbidden - the API key lacks the required scope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"class_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"ext_class_id\": \"<string>\",\n  \"class_description\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"meeting_passcode\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"session_times\": [\n    {\n      \"start_time\": 5440,\n      \"end_time\": 1036\n    },\n    {\n      \"start_time\": 8491,\n      \"end_time\": 7059\n    }\n  ],\n  \"settings\": {\n    \"waiting_room\": false,\n    \"join_before_host\": true,\n    \"jbh_time\": 8395\n  },\n  \"additional_instructors\": [\n    {\n      \"email\": \"nvhEsFfR8a@diXxlMyLHWpdc.hsi\",\n      \"user_name\": \"string\"\n    },\n    {\n      \"email\": \"CV5Kg@zZdNWEunMr.tpw\",\n      \"user_name\": \"string\"\n    }\n  ],\n  \"tracking_fields\": [\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "408d14be-330b-442e-bb34-df36c07cac8b",
+              "name": "Internal Server Error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"class_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"ext_class_id\": \"<string>\",\n  \"class_description\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"meeting_passcode\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"session_times\": [\n    {\n      \"start_time\": 5440,\n      \"end_time\": 1036\n    },\n    {\n      \"start_time\": 8491,\n      \"end_time\": 7059\n    }\n  ],\n  \"settings\": {\n    \"waiting_room\": false,\n    \"join_before_host\": true,\n    \"jbh_time\": 8395\n  },\n  \"additional_instructors\": [\n    {\n      \"email\": \"nvhEsFfR8a@diXxlMyLHWpdc.hsi\",\n      \"user_name\": \"string\"\n    },\n    {\n      \"email\": \"CV5Kg@zZdNWEunMr.tpw\",\n      \"user_name\": \"string\"\n    }\n  ],\n  \"tracking_fields\": [\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10bb610e-2dfd-4fc0-87c6-5bfa6b0c0f72",
+              "name": "Service Unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"class_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"ext_class_id\": \"<string>\",\n  \"class_description\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"meeting_passcode\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"session_times\": [\n    {\n      \"start_time\": 5440,\n      \"end_time\": 1036\n    },\n    {\n      \"start_time\": 8491,\n      \"end_time\": 7059\n    }\n  ],\n  \"settings\": {\n    \"waiting_room\": false,\n    \"join_before_host\": true,\n    \"jbh_time\": 8395\n  },\n  \"additional_instructors\": [\n    {\n      \"email\": \"nvhEsFfR8a@diXxlMyLHWpdc.hsi\",\n      \"user_name\": \"string\"\n    },\n    {\n      \"email\": \"CV5Kg@zZdNWEunMr.tpw\",\n      \"user_name\": \"string\"\n    }\n  ],\n  \"tracking_fields\": [\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b9f0029a-36ef-4345-bad1-251e1f03e12f",
+          "name": "Get class information",
+          "request": {
+            "name": "Get class information",
+            "description": {
+              "content": "Retrieve information for all classes, or a single class when a class_id or ext_class_id is supplied.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "classes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "class_id",
+                  "value": "<string>",
+                  "description": "Class identifier assigned by Class."
+                },
+                {
+                  "disabled": false,
+                  "key": "ext_class_id",
+                  "value": "<string>",
+                  "description": "External class identifier supplied by the integrator."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number to retrieve (positive integer)."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Records per page (1-1000)."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your organization's Class subdomain.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "890b5f64-8de6-4a1b-b359-0d45663fdadf",
+              "name": "A page of classes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ext_class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"class_id\": \"string\",\n      \"ext_class_id\": \"string\",\n      \"class_deferred_id\": \"string\",\n      \"class_name\": \"string\",\n      \"class_description\": \"string\",\n      \"timezone\": \"string\"\n    },\n    {\n      \"class_id\": \"string\",\n      \"ext_class_id\": \"string\",\n      \"class_deferred_id\": \"string\",\n      \"class_name\": \"string\",\n      \"class_description\": \"string\",\n      \"timezone\": \"string\"\n    }\n  ],\n  \"pagination\": {\n    \"total_records\": 3100,\n    \"current_page\": 9791,\n    \"total_pages\": 3401,\n    \"next_page\": 7037,\n    \"prev_page\": 4972\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d203f35a-52ec-40ee-ae9f-37823ab20c51",
+              "name": "Bad Request - validation failed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ext_class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9b89a2c-908c-4c3c-8ed4-38dbb811c7cd",
+              "name": "Unauthorized - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ext_class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4ad7a18-0d63-408c-a3e0-74b0371fed17",
+              "name": "Forbidden - the API key lacks the required scope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ext_class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "482c78d4-8a0c-4aee-8e24-d26776104691",
+              "name": "Not Found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ext_class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "35add5a7-ecb7-43aa-bdbf-3f8760dfede5",
+          "name": "Update a Class",
+          "request": {
+            "name": "Update a Class",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "classes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "class_id",
+                  "value": "<string>",
+                  "description": "Class identifier assigned by Class."
+                },
+                {
+                  "disabled": false,
+                  "key": "ext_class_id",
+                  "value": "<string>",
+                  "description": "External class identifier supplied by the integrator."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your organization's Class subdomain.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"class_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"ext_class_id\": \"<string>\",\n  \"class_description\": \"<string>\",\n  \"template_id\": \"<string>\",\n  \"meeting_passcode\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"session_times\": [\n    {\n      \"start_time\": \"<integer>\",\n      \"end_time\": \"<integer>\"\n    },\n    {\n      \"start_time\": \"<integer>\",\n      \"end_time\": \"<integer>\"\n    }\n  ],\n  \"settings\": {\n    \"waiting_room\": \"<boolean>\",\n    \"join_before_host\": \"<boolean>\",\n    \"jbh_time\": \"<integer>\"\n  },\n  \"additional_instructors\": [\n    {\n      \"email\": \"<email>\",\n      \"user_name\": \"<string>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"user_name\": \"<string>\"\n    }\n  ],\n  \"tracking_fields\": [\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3fb43a6d-eb17-4960-8c35-ad0f33ea697d",
+              "name": "A class.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ext_class_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"class_name\": \"string\",\n  \"email\": \"U5DN@tDUvtRZlgCyRKznZvFHJEUAaRTcyM.sk\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"display_name\": \"string\",\n  \"ext_class_id\": \"string\",\n  \"class_description\": \"string\",\n  \"template_id\": \"string\",\n  \"meeting_passcode\": \"string\",\n  \"timezone\": \"string\",\n  \"session_times\": [\n    {\n      \"start_time\": 6060,\n      \"end_time\": 4081\n    },\n    {\n      \"start_time\": 1485,\n      \"end_time\": 3136\n    }\n  ],\n  \"settings\": {\n    \"waiting_room\": false,\n    \"join_before_host\": true,\n    \"jbh_time\": 7058\n  },\n  \"additional_instructors\": [\n    {\n      \"email\": \"n7t9bf@bKUlDjTgBQCEpnVEthI.drrz\",\n      \"user_name\": \"string\"\n    },\n    {\n      \"email\": \"fo-lf@QcHMu.vpl\",\n      \"user_name\": \"string\"\n    }\n  ],\n  \"tracking_fields\": [\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"class_id\": \"string\",\n  \"ext_class_id\": \"string\",\n  \"class_deferred_id\": \"string\",\n  \"class_name\": \"string\",\n  \"class_description\": \"string\",\n  \"timezone\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "413454c9-b53d-4ec1-af9b-8da8f58d7b8b",
+              "name": "Bad Request - validation failed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ext_class_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"class_name\": \"string\",\n  \"email\": \"U5DN@tDUvtRZlgCyRKznZvFHJEUAaRTcyM.sk\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"display_name\": \"string\",\n  \"ext_class_id\": \"string\",\n  \"class_description\": \"string\",\n  \"template_id\": \"string\",\n  \"meeting_passcode\": \"string\",\n  \"timezone\": \"string\",\n  \"session_times\": [\n    {\n      \"start_time\": 6060,\n      \"end_time\": 4081\n    },\n    {\n      \"start_time\": 1485,\n      \"end_time\": 3136\n    }\n  ],\n  \"settings\": {\n    \"waiting_room\": false,\n    \"join_before_host\": true,\n    \"jbh_time\": 7058\n  },\n  \"additional_instructors\": [\n    {\n      \"email\": \"n7t9bf@bKUlDjTgBQCEpnVEthI.drrz\",\n      \"user_name\": \"string\"\n    },\n    {\n      \"email\": \"fo-lf@QcHMu.vpl\",\n      \"user_name\": \"string\"\n    }\n  ],\n  \"tracking_fields\": [\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38935a73-fada-4d52-9330-a22906390b48",
+              "name": "Unauthorized - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ext_class_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"class_name\": \"string\",\n  \"email\": \"U5DN@tDUvtRZlgCyRKznZvFHJEUAaRTcyM.sk\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"display_name\": \"string\",\n  \"ext_class_id\": \"string\",\n  \"class_description\": \"string\",\n  \"template_id\": \"string\",\n  \"meeting_passcode\": \"string\",\n  \"timezone\": \"string\",\n  \"session_times\": [\n    {\n      \"start_time\": 6060,\n      \"end_time\": 4081\n    },\n    {\n      \"start_time\": 1485,\n      \"end_time\": 3136\n    }\n  ],\n  \"settings\": {\n    \"waiting_room\": false,\n    \"join_before_host\": true,\n    \"jbh_time\": 7058\n  },\n  \"additional_instructors\": [\n    {\n      \"email\": \"n7t9bf@bKUlDjTgBQCEpnVEthI.drrz\",\n      \"user_name\": \"string\"\n    },\n    {\n      \"email\": \"fo-lf@QcHMu.vpl\",\n      \"user_name\": \"string\"\n    }\n  ],\n  \"tracking_fields\": [\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85354834-cc9c-4f02-8cf5-0fe866f681e3",
+              "name": "Forbidden - the API key lacks the required scope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ext_class_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"class_name\": \"string\",\n  \"email\": \"U5DN@tDUvtRZlgCyRKznZvFHJEUAaRTcyM.sk\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"display_name\": \"string\",\n  \"ext_class_id\": \"string\",\n  \"class_description\": \"string\",\n  \"template_id\": \"string\",\n  \"meeting_passcode\": \"string\",\n  \"timezone\": \"string\",\n  \"session_times\": [\n    {\n      \"start_time\": 6060,\n      \"end_time\": 4081\n    },\n    {\n      \"start_time\": 1485,\n      \"end_time\": 3136\n    }\n  ],\n  \"settings\": {\n    \"waiting_room\": false,\n    \"join_before_host\": true,\n    \"jbh_time\": 7058\n  },\n  \"additional_instructors\": [\n    {\n      \"email\": \"n7t9bf@bKUlDjTgBQCEpnVEthI.drrz\",\n      \"user_name\": \"string\"\n    },\n    {\n      \"email\": \"fo-lf@QcHMu.vpl\",\n      \"user_name\": \"string\"\n    }\n  ],\n  \"tracking_fields\": [\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f10eea0-0cb2-4dc2-8a90-c4fdb02e8234",
+              "name": "Not Found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ext_class_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"class_name\": \"string\",\n  \"email\": \"U5DN@tDUvtRZlgCyRKznZvFHJEUAaRTcyM.sk\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"display_name\": \"string\",\n  \"ext_class_id\": \"string\",\n  \"class_description\": \"string\",\n  \"template_id\": \"string\",\n  \"meeting_passcode\": \"string\",\n  \"timezone\": \"string\",\n  \"session_times\": [\n    {\n      \"start_time\": 6060,\n      \"end_time\": 4081\n    },\n    {\n      \"start_time\": 1485,\n      \"end_time\": 3136\n    }\n  ],\n  \"settings\": {\n    \"waiting_room\": false,\n    \"join_before_host\": true,\n    \"jbh_time\": 7058\n  },\n  \"additional_instructors\": [\n    {\n      \"email\": \"n7t9bf@bKUlDjTgBQCEpnVEthI.drrz\",\n      \"user_name\": \"string\"\n    },\n    {\n      \"email\": \"fo-lf@QcHMu.vpl\",\n      \"user_name\": \"string\"\n    }\n  ],\n  \"tracking_fields\": [\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7cb96a07-d788-4116-9bc2-b79a95e044c6",
+          "name": "Remove a Class",
+          "request": {
+            "name": "Remove a Class",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "classes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "class_id",
+                  "value": "<string>",
+                  "description": "Class identifier assigned by Class."
+                },
+                {
+                  "disabled": false,
+                  "key": "ext_class_id",
+                  "value": "<string>",
+                  "description": "External class identifier supplied by the integrator."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your organization's Class subdomain.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6c1b83c5-ea6a-4d3e-8781-d356e66d080c",
+              "name": "The resource was removed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ext_class_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9eff8fac-c047-4d9b-b0d2-97adf09c439f",
+              "name": "Unauthorized - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ext_class_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f41149fc-9556-4492-901e-11949c3fe296",
+              "name": "Forbidden - the API key lacks the required scope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ext_class_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e24940f3-3cd2-4754-b8d9-8b025ee62480",
+              "name": "Not Found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "classes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "class_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ext_class_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization's Class subdomain.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your organization's Class subdomain.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-organization",
+      "key": "organization"
+    },
+    {
+      "type": "string",
+      "value": "https://{{organization}}.class.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f1ba5391-2626-44bf-9960-dee33b9c3ae6",
+    "name": "Class Developer Classes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Class (fka ClassEDU), the virtual classroom platform built for Zoom and Microsoft Teams. The API lets administrators and integrators provision classes, manage enrollments, generate learner launch links, schedule class dates, manage reusable class templates, manage non-learner users, and pull attendance and engagement reporting. Authentication uses a per-organization API key presented as a Bearer token, gated by permission scopes.\n\nContact Support:\n Name: Class Developer Platform",
+      "type": "text/plain"
+    }
+  }
+}
