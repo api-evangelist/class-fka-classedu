@@ -138,6 +138,8 @@ apis:
   humanURL: https://developer.class.com/
   baseURL: https://your-organization.class.com/api/v1
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
