@@ -21,6 +21,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "class-fka-classedu-classes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "class-fka-classedu-enrollments-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "class-fka-classedu-launch-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "class-fka-classedu-reporting-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "class-fka-classedu-schedules-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "class-fka-classedu-templates-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "class-fka-classedu-users-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

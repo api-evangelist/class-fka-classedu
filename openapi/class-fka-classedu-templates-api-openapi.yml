@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Class Developer Classes Templates API
   version: v1
@@ -121,6 +121,26 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
+    TemplateResponse:
+      description: A template.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Template'
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Deleted:
+      description: The resource was removed.
+    NotFound:
+      description: Not Found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     TemplateListResponse:
       description: A page of templates.
       content:
@@ -140,33 +160,19 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad Request - validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Forbidden:
       description: Forbidden - the API key lacks the required scope.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Deleted:
-      description: The resource was removed.
-    TemplateResponse:
-      description: A template.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Template'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable explanation of the failure.
     Template:
       type: object
       properties:
@@ -178,12 +184,6 @@ components:
           type: string
         status:
           type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable explanation of the failure.
     TemplateCreate:
       type: object
       required:
@@ -213,6 +213,13 @@ components:
           - integer
           - 'null'
   parameters:
+    TemplateId:
+      name: template_id
+      in: query
+      description: Template identifier.
+      required: false
+      schema:
+        type: string
     Limit:
       name: limit
       in: query
@@ -223,13 +230,6 @@ components:
         minimum: 1
         maximum: 1000
         default: 100
-    TemplateId:
-      name: template_id
-      in: query
-      description: Template identifier.
-      required: false
-      schema:
-        type: string
     Page:
       name: page
       in: query

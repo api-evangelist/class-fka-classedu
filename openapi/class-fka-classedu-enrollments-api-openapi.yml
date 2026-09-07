@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Class Developer Classes Enrollments API
   version: v1
@@ -121,40 +121,52 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    Page:
-      name: page
-      in: query
-      description: Page number to retrieve (positive integer).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    ClassId:
-      name: class_id
-      in: query
-      description: Class identifier assigned by Class.
-      required: false
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      description: Records per page (1-1000).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
-        default: 100
-    ExtClassId:
-      name: ext_class_id
-      in: query
-      description: External class identifier supplied by the integrator.
-      required: false
-      schema:
-        type: string
+  responses:
+    EnrollmentListResponse:
+      description: A page of enrollments.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Enrollment'
+              pagination:
+                $ref: '#/components/schemas/Pagination'
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Deleted:
+      description: The resource was removed.
+    NotFound:
+      description: Not Found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    EnrollmentResponse:
+      description: An enrollment.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Enrollment'
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -162,6 +174,23 @@ components:
         message:
           type: string
           description: Human-readable explanation of the failure.
+    Pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+        current_page:
+          type: integer
+        total_pages:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
     Enrollment:
       type: object
       properties:
@@ -196,69 +225,40 @@ components:
           type: string
         display_name:
           type: string
-    Pagination:
-      type: object
-      properties:
-        total_records:
-          type: integer
-        current_page:
-          type: integer
-        total_pages:
-          type: integer
-        next_page:
-          type:
-          - integer
-          - 'null'
-        prev_page:
-          type:
-          - integer
-          - 'null'
-  responses:
-    EnrollmentListResponse:
-      description: A page of enrollments.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Enrollment'
-              pagination:
-                $ref: '#/components/schemas/Pagination'
-    EnrollmentResponse:
-      description: An enrollment.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Enrollment'
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad Request - validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Deleted:
-      description: The resource was removed.
+  parameters:
+    ExtClassId:
+      name: ext_class_id
+      in: query
+      description: External class identifier supplied by the integrator.
+      required: false
+      schema:
+        type: string
+    ClassId:
+      name: class_id
+      in: query
+      description: Class identifier assigned by Class.
+      required: false
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: Records per page (1-1000).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 100
+    Page:
+      name: page
+      in: query
+      description: Page number to retrieve (positive integer).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
   securitySchemes:
     bearerAuth:
       type: http

@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Class Developer Classes API
   version: v1
@@ -129,36 +129,32 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    ClassResponse:
-      description: A class.
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Class'
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Bad Request - validation failed.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found.
+    Deleted:
+      description: The resource was removed.
+    ClassResponse:
+      description: A class.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
-    ServerError:
-      description: Internal Server Error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ServiceUnavailable:
-      description: Service Unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Class'
     ClassListResponse:
       description: A page of classes.
       content:
@@ -172,21 +168,39 @@ components:
                   $ref: '#/components/schemas/Class'
               pagination:
                 $ref: '#/components/schemas/Pagination'
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
+    ServerError:
+      description: Internal Server Error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
+    NotFound:
+      description: Not Found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Deleted:
-      description: The resource was removed.
+    ServiceUnavailable:
+      description: Service Unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    ExtClassId:
+      name: ext_class_id
+      in: query
+      description: External class identifier supplied by the integrator.
+      required: false
+      schema:
+        type: string
+    ClassId:
+      name: class_id
+      in: query
+      description: Class identifier assigned by Class.
+      required: false
+      schema:
+        type: string
     Page:
       name: page
       in: query
@@ -196,13 +210,6 @@ components:
         type: integer
         minimum: 1
         default: 1
-    ClassId:
-      name: class_id
-      in: query
-      description: Class identifier assigned by Class.
-      required: false
-      schema:
-        type: string
     Limit:
       name: limit
       in: query
@@ -213,32 +220,7 @@ components:
         minimum: 1
         maximum: 1000
         default: 100
-    ExtClassId:
-      name: ext_class_id
-      in: query
-      description: External class identifier supplied by the integrator.
-      required: false
-      schema:
-        type: string
   schemas:
-    ClassSettings:
-      type: object
-      properties:
-        waiting_room:
-          type: boolean
-        join_before_host:
-          type: boolean
-        jbh_time:
-          type: integer
-    SessionTime:
-      type: object
-      properties:
-        start_time:
-          type: integer
-          description: Unix time.
-        end_time:
-          type: integer
-          description: Unix time.
     Class:
       type: object
       properties:
@@ -254,15 +236,6 @@ components:
           type: string
         timezone:
           type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable explanation of the failure.
-    ClassUpdate:
-      allOf:
-      - $ref: '#/components/schemas/ClassCreate'
     Instructor:
       type: object
       properties:
@@ -271,6 +244,28 @@ components:
           format: email
         user_name:
           type: string
+    ClassSettings:
+      type: object
+      properties:
+        waiting_room:
+          type: boolean
+        join_before_host:
+          type: boolean
+        jbh_time:
+          type: integer
+    TrackingField:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable explanation of the failure.
     ClassCreate:
       type: object
       required:
@@ -312,13 +307,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TrackingField'
-    TrackingField:
-      type: object
-      properties:
-        field:
-          type: string
-        value:
-          type: string
+    ClassUpdate:
+      allOf:
+      - $ref: '#/components/schemas/ClassCreate'
     Pagination:
       type: object
       properties:
@@ -336,6 +327,15 @@ components:
           type:
           - integer
           - 'null'
+    SessionTime:
+      type: object
+      properties:
+        start_time:
+          type: integer
+          description: Unix time.
+        end_time:
+          type: integer
+          description: Unix time.
   securitySchemes:
     bearerAuth:
       type: http
