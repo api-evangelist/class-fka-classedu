@@ -81,6 +81,8 @@ apis:
   humanURL: https://developer.class.com/
   baseURL: https://your-organization.class.com/api/v1
   tags:
+  - Enrollment
+  tags_raw:
   - Enrollments
   properties:
   - type: OpenAPI
@@ -95,6 +97,8 @@ apis:
   humanURL: https://developer.class.com/
   baseURL: https://your-organization.class.com/api/v1
   tags:
+  - Launches
+  tags_raw:
   - Launch
   properties:
   - type: OpenAPI
@@ -123,6 +127,8 @@ apis:
   humanURL: https://developer.class.com/
   baseURL: https://your-organization.class.com/api/v1
   tags:
+  - Schedule
+  tags_raw:
   - Schedules
   properties:
   - type: OpenAPI
