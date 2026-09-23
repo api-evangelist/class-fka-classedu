@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Class Developer Classes Templates API
+  title: Class Developer Templates API
   version: v1
   x-apievangelist-provenance:
     generated: '2026-07-18'
@@ -120,98 +120,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    TemplateResponse:
-      description: A template.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Template'
-    BadRequest:
-      description: Bad Request - validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Deleted:
-      description: The resource was removed.
-    NotFound:
-      description: Not Found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TemplateListResponse:
-      description: A page of templates.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Template'
-              pagination:
-                $ref: '#/components/schemas/Pagination'
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable explanation of the failure.
-    Template:
-      type: object
-      properties:
-        template_id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        status:
-          type: string
-    TemplateCreate:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        status:
-          type: string
-    Pagination:
-      type: object
-      properties:
-        total_records:
-          type: integer
-        current_page:
-          type: integer
-        total_pages:
-          type: integer
-        next_page:
-          type:
-          - integer
-          - 'null'
-        prev_page:
-          type:
-          - integer
-          - 'null'
   parameters:
     TemplateId:
       name: template_id
@@ -239,6 +147,98 @@ components:
         type: integer
         minimum: 1
         default: 1
+  responses:
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TemplateResponse:
+      description: A template.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Template'
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Deleted:
+      description: The resource was removed.
+    TemplateListResponse:
+      description: A page of templates.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Template'
+              pagination:
+                $ref: '#/components/schemas/Pagination'
+  schemas:
+    Template:
+      type: object
+      properties:
+        template_id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+    TemplateCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable explanation of the failure.
+    Pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+        current_page:
+          type: integer
+        total_pages:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
   securitySchemes:
     bearerAuth:
       type: http

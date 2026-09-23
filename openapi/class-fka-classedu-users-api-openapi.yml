@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Class Developer Classes Users API
+  title: Class Developer Users API
   version: v1
   x-apievangelist-provenance:
     generated: '2026-07-18'
@@ -97,6 +97,86 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Records per page (1-1000).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 100
+    Page:
+      name: page
+      in: query
+      description: Page number to retrieve (positive integer).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    ExtUserId:
+      name: ext_user_id
+      in: query
+      description: External user identifier supplied by the integrator.
+      required: false
+      schema:
+        type: string
+    UserId:
+      name: id
+      in: query
+      description: User identifier assigned by Class.
+      required: false
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UserListResponse:
+      description: A page of users.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+              pagination:
+                $ref: '#/components/schemas/Pagination'
+    NotFound:
+      description: Not Found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UserResponse:
+      description: A user.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+    Deleted:
+      description: The resource was removed.
   schemas:
     User:
       type: object
@@ -120,23 +200,6 @@ components:
         message:
           type: string
           description: Human-readable explanation of the failure.
-    Pagination:
-      type: object
-      properties:
-        total_records:
-          type: integer
-        current_page:
-          type: integer
-        total_pages:
-          type: integer
-        next_page:
-          type:
-          - integer
-          - 'null'
-        prev_page:
-          type:
-          - integer
-          - 'null'
     UserUpsert:
       type: object
       properties:
@@ -156,86 +219,23 @@ components:
           type: array
           items:
             type: string
-  parameters:
-    ExtUserId:
-      name: ext_user_id
-      in: query
-      description: External user identifier supplied by the integrator.
-      required: false
-      schema:
-        type: string
-    UserId:
-      name: id
-      in: query
-      description: User identifier assigned by Class.
-      required: false
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      description: Records per page (1-1000).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
-        default: 100
-    Page:
-      name: page
-      in: query
-      description: Page number to retrieve (positive integer).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-  responses:
-    UserResponse:
-      description: A user.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/User'
-    BadRequest:
-      description: Bad Request - validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Deleted:
-      description: The resource was removed.
-    NotFound:
-      description: Not Found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    UserListResponse:
-      description: A page of users.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'
-              pagination:
-                $ref: '#/components/schemas/Pagination'
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+        current_page:
+          type: integer
+        total_pages:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
   securitySchemes:
     bearerAuth:
       type: http

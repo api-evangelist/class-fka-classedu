@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Class Developer Classes Schedules API
+  title: Class Developer Schedules API
   version: v1
   x-apievangelist-provenance:
     generated: '2026-07-18'
@@ -95,127 +95,18 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    ScheduleListResponse:
-      description: A page of class dates.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Schedule'
-              pagination:
-                $ref: '#/components/schemas/Pagination'
-    BadRequest:
-      description: Bad Request - validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Deleted:
-      description: The resource was removed.
-    NotFound:
-      description: Not Found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ScheduleResponse:
-      description: A class date.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Schedule'
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable explanation of the failure.
-    ScheduleCreate:
-      type: object
-      required:
-      - class_id
-      - start_time
-      - end_time
-      properties:
-        class_id:
-          type: string
-        start_time:
-          type: integer
-          description: Unix time.
-        end_time:
-          type: integer
-          description: Unix time.
-        timezone:
-          type: string
-          deprecated: true
-          description: Time Zone ID (deprecated).
-    Pagination:
-      type: object
-      properties:
-        total_records:
-          type: integer
-        current_page:
-          type: integer
-        total_pages:
-          type: integer
-        next_page:
-          type:
-          - integer
-          - 'null'
-        prev_page:
-          type:
-          - integer
-          - 'null'
-    Schedule:
-      type: object
-      properties:
-        schedule_id:
-          type: string
-        session_id:
-          type: string
-        class_id:
-          type: string
-        start_time:
-          type: integer
-        end_time:
-          type: integer
   parameters:
-    ScheduleId:
-      name: schedule_id
-      in: query
-      description: Schedule (class date) identifier.
-      required: false
-      schema:
-        type: string
-    ClassId:
-      name: class_id
-      in: query
-      description: Class identifier assigned by Class.
-      required: false
-      schema:
-        type: string
     ExtClassId:
       name: ext_class_id
       in: query
       description: External class identifier supplied by the integrator.
+      required: false
+      schema:
+        type: string
+    ScheduleId:
+      name: schedule_id
+      in: query
+      description: Schedule (class date) identifier.
       required: false
       schema:
         type: string
@@ -238,6 +129,115 @@ components:
         type: integer
         minimum: 1
         default: 1
+    ClassId:
+      name: class_id
+      in: query
+      description: Class identifier assigned by Class.
+      required: false
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ScheduleResponse:
+      description: A class date.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Schedule'
+    NotFound:
+      description: Not Found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ScheduleListResponse:
+      description: A page of class dates.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Schedule'
+              pagination:
+                $ref: '#/components/schemas/Pagination'
+    Deleted:
+      description: The resource was removed.
+  schemas:
+    Schedule:
+      type: object
+      properties:
+        schedule_id:
+          type: string
+        session_id:
+          type: string
+        class_id:
+          type: string
+        start_time:
+          type: integer
+        end_time:
+          type: integer
+    ScheduleCreate:
+      type: object
+      required:
+      - class_id
+      - start_time
+      - end_time
+      properties:
+        class_id:
+          type: string
+        start_time:
+          type: integer
+          description: Unix time.
+        end_time:
+          type: integer
+          description: Unix time.
+        timezone:
+          type: string
+          deprecated: true
+          description: Time Zone ID (deprecated).
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable explanation of the failure.
+    Pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+        current_page:
+          type: integer
+        total_pages:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
   securitySchemes:
     bearerAuth:
       type: http

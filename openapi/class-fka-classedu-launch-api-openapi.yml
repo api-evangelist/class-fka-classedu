@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Class Developer Classes Launch API
+  title: Class Developer Launch API
   version: v1
   x-apievangelist-provenance:
     generated: '2026-07-18'
@@ -50,50 +50,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  schemas:
-    Launch:
-      type: object
-      properties:
-        launch_url:
-          type: string
-          format: uri
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable explanation of the failure.
-  responses:
-    LaunchResponse:
-      description: A learner launch link.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Launch'
-    NotFound:
-      description: Not Found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad Request - validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     ExtClassId:
       name: ext_class_id
@@ -109,6 +65,50 @@ components:
       required: false
       schema:
         type: string
+  responses:
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    LaunchResponse:
+      description: A learner launch link.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Launch'
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Launch:
+      type: object
+      properties:
+        launch_url:
+          type: string
+          format: uri
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable explanation of the failure.
   securitySchemes:
     bearerAuth:
       type: http

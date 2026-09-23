@@ -128,114 +128,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad Request - validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Deleted:
-      description: The resource was removed.
-    ClassResponse:
-      description: A class.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Class'
-    ClassListResponse:
-      description: A page of classes.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Class'
-              pagination:
-                $ref: '#/components/schemas/Pagination'
-    ServerError:
-      description: Internal Server Error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ServiceUnavailable:
-      description: Service Unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    ExtClassId:
-      name: ext_class_id
-      in: query
-      description: External class identifier supplied by the integrator.
-      required: false
-      schema:
-        type: string
-    ClassId:
-      name: class_id
-      in: query
-      description: Class identifier assigned by Class.
-      required: false
-      schema:
-        type: string
-    Page:
-      name: page
-      in: query
-      description: Page number to retrieve (positive integer).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    Limit:
-      name: limit
-      in: query
-      description: Records per page (1-1000).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
-        default: 100
   schemas:
-    Class:
-      type: object
-      properties:
-        class_id:
-          type: string
-        ext_class_id:
-          type: string
-        class_deferred_id:
-          type: string
-        class_name:
-          type: string
-        class_description:
-          type: string
-        timezone:
-          type: string
     Instructor:
       type: object
       properties:
@@ -260,12 +153,41 @@ components:
           type: string
         value:
           type: string
+    ClassUpdate:
+      allOf:
+      - $ref: '#/components/schemas/ClassCreate'
+    Pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+        current_page:
+          type: integer
+        total_pages:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
     Error:
       type: object
       properties:
         message:
           type: string
           description: Human-readable explanation of the failure.
+    SessionTime:
+      type: object
+      properties:
+        start_time:
+          type: integer
+          description: Unix time.
+        end_time:
+          type: integer
+          description: Unix time.
     ClassCreate:
       type: object
       required:
@@ -307,35 +229,113 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TrackingField'
-    ClassUpdate:
-      allOf:
-      - $ref: '#/components/schemas/ClassCreate'
-    Pagination:
+    Class:
       type: object
       properties:
-        total_records:
-          type: integer
-        current_page:
-          type: integer
-        total_pages:
-          type: integer
-        next_page:
-          type:
-          - integer
-          - 'null'
-        prev_page:
-          type:
-          - integer
-          - 'null'
-    SessionTime:
-      type: object
-      properties:
-        start_time:
-          type: integer
-          description: Unix time.
-        end_time:
-          type: integer
-          description: Unix time.
+        class_id:
+          type: string
+        ext_class_id:
+          type: string
+        class_deferred_id:
+          type: string
+        class_name:
+          type: string
+        class_description:
+          type: string
+        timezone:
+          type: string
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: Page number to retrieve (positive integer).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    ExtClassId:
+      name: ext_class_id
+      in: query
+      description: External class identifier supplied by the integrator.
+      required: false
+      schema:
+        type: string
+    ClassId:
+      name: class_id
+      in: query
+      description: Class identifier assigned by Class.
+      required: false
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: Records per page (1-1000).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 100
+  responses:
+    ServerError:
+      description: Internal Server Error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ClassListResponse:
+      description: A page of classes.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Class'
+              pagination:
+                $ref: '#/components/schemas/Pagination'
+    Deleted:
+      description: The resource was removed.
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServiceUnavailable:
+      description: Service Unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ClassResponse:
+      description: A class.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Class'
   securitySchemes:
     bearerAuth:
       type: http
