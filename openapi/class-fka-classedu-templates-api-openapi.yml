@@ -147,52 +147,6 @@ components:
         type: integer
         minimum: 1
         default: 1
-  responses:
-    BadRequest:
-      description: Bad Request - validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TemplateResponse:
-      description: A template.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Template'
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Deleted:
-      description: The resource was removed.
-    TemplateListResponse:
-      description: A page of templates.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Template'
-              pagination:
-                $ref: '#/components/schemas/Pagination'
   schemas:
     Template:
       type: object
@@ -216,12 +170,6 @@ components:
           type: string
         status:
           type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable explanation of the failure.
     Pagination:
       type: object
       properties:
@@ -239,6 +187,58 @@ components:
           type:
           - integer
           - 'null'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable explanation of the failure.
+  responses:
+    TemplateListResponse:
+      description: A page of templates.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Template'
+              pagination:
+                $ref: '#/components/schemas/Pagination'
+    TemplateResponse:
+      description: A template.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Template'
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Deleted:
+      description: The resource was removed.
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

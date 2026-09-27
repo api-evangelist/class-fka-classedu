@@ -121,55 +121,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    ExtClassId:
-      name: ext_class_id
-      in: query
-      description: External class identifier supplied by the integrator.
-      required: false
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      description: Records per page (1-1000).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
-        default: 100
-    Page:
-      name: page
-      in: query
-      description: Page number to retrieve (positive integer).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    ClassId:
-      name: class_id
-      in: query
-      description: Class identifier assigned by Class.
-      required: false
-      schema:
-        type: string
   schemas:
-    Enrollment:
-      type: object
-      properties:
-        student_id:
-          type: string
-        ext_person_id:
-          type: string
-        email:
-          type: string
-          format: email
-        class_id:
-          type: string
-        role:
-          type: string
     EnrollmentCreate:
       type: object
       properties:
@@ -190,12 +142,6 @@ components:
           type: string
         display_name:
           type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable explanation of the failure.
     Pagination:
       type: object
       properties:
@@ -213,13 +159,27 @@ components:
           type:
           - integer
           - 'null'
+    Enrollment:
+      type: object
+      properties:
+        student_id:
+          type: string
+        ext_person_id:
+          type: string
+        email:
+          type: string
+          format: email
+        class_id:
+          type: string
+        role:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable explanation of the failure.
   responses:
-    BadRequest:
-      description: Bad Request - validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Unauthorized - missing or invalid API key.
       content:
@@ -232,6 +192,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Deleted:
+      description: The resource was removed.
+    EnrollmentResponse:
+      description: An enrollment.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Enrollment'
     EnrollmentListResponse:
       description: A page of enrollments.
       content:
@@ -245,20 +213,52 @@ components:
                   $ref: '#/components/schemas/Enrollment'
               pagination:
                 $ref: '#/components/schemas/Pagination'
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Forbidden:
       description: Forbidden - the API key lacks the required scope.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    EnrollmentResponse:
-      description: An enrollment.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Enrollment'
-    Deleted:
-      description: The resource was removed.
+  parameters:
+    ExtClassId:
+      name: ext_class_id
+      in: query
+      description: External class identifier supplied by the integrator.
+      required: false
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: Records per page (1-1000).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 100
+    ClassId:
+      name: class_id
+      in: query
+      description: Class identifier assigned by Class.
+      required: false
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      description: Page number to retrieve (positive integer).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
   securitySchemes:
     bearerAuth:
       type: http
