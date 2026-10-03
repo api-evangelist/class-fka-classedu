@@ -128,65 +128,40 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    ServiceUnavailable:
-      description: Service Unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Deleted:
-      description: The resource was removed.
-    ClassResponse:
-      description: A class.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Class'
-    ClassListResponse:
-      description: A page of classes.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Class'
-              pagination:
-                $ref: '#/components/schemas/Pagination'
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ServerError:
-      description: Internal Server Error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad Request - validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Class:
+      type: object
+      properties:
+        class_id:
+          type: string
+        ext_class_id:
+          type: string
+        class_deferred_id:
+          type: string
+        class_name:
+          type: string
+        class_description:
+          type: string
+        timezone:
+          type: string
+    ClassUpdate:
+      allOf:
+      - $ref: '#/components/schemas/ClassCreate'
+    ClassSettings:
+      type: object
+      properties:
+        waiting_room:
+          type: boolean
+        join_before_host:
+          type: boolean
+        jbh_time:
+          type: integer
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable explanation of the failure.
     SessionTime:
       type: object
       properties:
@@ -196,9 +171,6 @@ components:
         end_time:
           type: integer
           description: Unix time.
-    ClassUpdate:
-      allOf:
-      - $ref: '#/components/schemas/ClassCreate'
     Pagination:
       type: object
       properties:
@@ -216,21 +188,13 @@ components:
           type:
           - integer
           - 'null'
-    Error:
+    TrackingField:
       type: object
       properties:
-        message:
+        field:
           type: string
-          description: Human-readable explanation of the failure.
-    ClassSettings:
-      type: object
-      properties:
-        waiting_room:
-          type: boolean
-        join_before_host:
-          type: boolean
-        jbh_time:
-          type: integer
+        value:
+          type: string
     Instructor:
       type: object
       properties:
@@ -238,28 +202,6 @@ components:
           type: string
           format: email
         user_name:
-          type: string
-    Class:
-      type: object
-      properties:
-        class_id:
-          type: string
-        ext_class_id:
-          type: string
-        class_deferred_id:
-          type: string
-        class_name:
-          type: string
-        class_description:
-          type: string
-        timezone:
-          type: string
-    TrackingField:
-      type: object
-      properties:
-        field:
-          type: string
-        value:
           type: string
     ClassCreate:
       type: object
@@ -302,24 +244,65 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TrackingField'
+  responses:
+    ClassResponse:
+      description: A class.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Class'
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ClassListResponse:
+      description: A page of classes.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Class'
+              pagination:
+                $ref: '#/components/schemas/Pagination'
+    ServerError:
+      description: Internal Server Error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Deleted:
+      description: The resource was removed.
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServiceUnavailable:
+      description: Service Unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    Limit:
-      name: limit
-      in: query
-      description: Records per page (1-1000).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
-        default: 100
-    ClassId:
-      name: class_id
-      in: query
-      description: Class identifier assigned by Class.
-      required: false
-      schema:
-        type: string
     ExtClassId:
       name: ext_class_id
       in: query
@@ -336,6 +319,23 @@ components:
         type: integer
         minimum: 1
         default: 1
+    ClassId:
+      name: class_id
+      in: query
+      description: Class identifier assigned by Class.
+      required: false
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: Records per page (1-1000).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 100
   securitySchemes:
     bearerAuth:
       type: http

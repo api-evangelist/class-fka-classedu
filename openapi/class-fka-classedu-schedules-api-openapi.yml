@@ -96,6 +96,25 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ScheduleCreate:
+      type: object
+      required:
+      - class_id
+      - start_time
+      - end_time
+      properties:
+        class_id:
+          type: string
+        start_time:
+          type: integer
+          description: Unix time.
+        end_time:
+          type: integer
+          description: Unix time.
+        timezone:
+          type: string
+          deprecated: true
+          description: Time Zone ID (deprecated).
     Schedule:
       type: object
       properties:
@@ -126,25 +145,6 @@ components:
           type:
           - integer
           - 'null'
-    ScheduleCreate:
-      type: object
-      required:
-      - class_id
-      - start_time
-      - end_time
-      properties:
-        class_id:
-          type: string
-        start_time:
-          type: integer
-          description: Unix time.
-        end_time:
-          type: integer
-          description: Unix time.
-        timezone:
-          type: string
-          deprecated: true
-          description: Time Zone ID (deprecated).
     Error:
       type: object
       properties:
@@ -152,12 +152,32 @@ components:
           type: string
           description: Human-readable explanation of the failure.
   responses:
-    ScheduleResponse:
-      description: A class date.
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Schedule'
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Deleted:
+      description: The resource was removed.
     ScheduleListResponse:
       description: A page of class dates.
       content:
@@ -171,47 +191,13 @@ components:
                   $ref: '#/components/schemas/Schedule'
               pagination:
                 $ref: '#/components/schemas/Pagination'
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
+    ScheduleResponse:
+      description: A class date.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Deleted:
-      description: The resource was removed.
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad Request - validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Schedule'
   parameters:
-    ExtClassId:
-      name: ext_class_id
-      in: query
-      description: External class identifier supplied by the integrator.
-      required: false
-      schema:
-        type: string
-    ClassId:
-      name: class_id
-      in: query
-      description: Class identifier assigned by Class.
-      required: false
-      schema:
-        type: string
     Limit:
       name: limit
       in: query
@@ -222,6 +208,27 @@ components:
         minimum: 1
         maximum: 1000
         default: 100
+    ClassId:
+      name: class_id
+      in: query
+      description: Class identifier assigned by Class.
+      required: false
+      schema:
+        type: string
+    ScheduleId:
+      name: schedule_id
+      in: query
+      description: Schedule (class date) identifier.
+      required: false
+      schema:
+        type: string
+    ExtClassId:
+      name: ext_class_id
+      in: query
+      description: External class identifier supplied by the integrator.
+      required: false
+      schema:
+        type: string
     Page:
       name: page
       in: query
@@ -231,13 +238,6 @@ components:
         type: integer
         minimum: 1
         default: 1
-    ScheduleId:
-      name: schedule_id
-      in: query
-      description: Schedule (class date) identifier.
-      required: false
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

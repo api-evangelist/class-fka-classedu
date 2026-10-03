@@ -51,26 +51,26 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     LaunchResponse:
       description: A learner launch link.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Launch'
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: Not Found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
       content:
         application/json:
           schema:
@@ -95,17 +95,17 @@ components:
           type: string
           description: Human-readable explanation of the failure.
   parameters:
-    ExtClassId:
-      name: ext_class_id
-      in: query
-      description: External class identifier supplied by the integrator.
-      required: false
-      schema:
-        type: string
     ClassId:
       name: class_id
       in: query
       description: Class identifier assigned by Class.
+      required: false
+      schema:
+        type: string
+    ExtClassId:
+      name: ext_class_id
+      in: query
+      description: External class identifier supplied by the integrator.
       required: false
       schema:
         type: string

@@ -73,6 +73,12 @@ paths:
           $ref: '#/components/responses/Forbidden'
 components:
   responses:
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     ReportResponse:
       description: A reporting result set.
       content:
@@ -85,12 +91,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Bad Request - validation failed.
       content:
@@ -98,16 +98,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    Report:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-        pagination:
-          $ref: '#/components/schemas/Pagination'
     Pagination:
       type: object
       properties:
@@ -125,6 +115,16 @@ components:
           type:
           - integer
           - 'null'
+    Report:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     Error:
       type: object
       properties:
@@ -132,17 +132,26 @@ components:
           type: string
           description: Human-readable explanation of the failure.
   parameters:
-    ExtClassId:
-      name: ext_class_id
-      in: query
-      description: External class identifier supplied by the integrator.
-      required: false
-      schema:
-        type: string
     ClassId:
       name: class_id
       in: query
       description: Class identifier assigned by Class.
+      required: false
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      description: Page number to retrieve (positive integer).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    ExtClassId:
+      name: ext_class_id
+      in: query
+      description: External class identifier supplied by the integrator.
       required: false
       schema:
         type: string
@@ -156,15 +165,6 @@ components:
         minimum: 1
         maximum: 1000
         default: 100
-    Page:
-      name: page
-      in: query
-      description: Page number to retrieve (positive integer).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
   securitySchemes:
     bearerAuth:
       type: http

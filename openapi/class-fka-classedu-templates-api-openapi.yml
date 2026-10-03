@@ -120,6 +120,52 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    TemplateResponse:
+      description: A template.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Template'
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Deleted:
+      description: The resource was removed.
+    TemplateListResponse:
+      description: A page of templates.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Template'
+              pagination:
+                $ref: '#/components/schemas/Pagination'
   parameters:
     TemplateId:
       name: template_id
@@ -148,28 +194,6 @@ components:
         minimum: 1
         default: 1
   schemas:
-    Template:
-      type: object
-      properties:
-        template_id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        status:
-          type: string
-    TemplateCreate:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        status:
-          type: string
     Pagination:
       type: object
       properties:
@@ -187,58 +211,34 @@ components:
           type:
           - integer
           - 'null'
+    TemplateCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+    Template:
+      type: object
+      properties:
+        template_id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
     Error:
       type: object
       properties:
         message:
           type: string
           description: Human-readable explanation of the failure.
-  responses:
-    TemplateListResponse:
-      description: A page of templates.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Template'
-              pagination:
-                $ref: '#/components/schemas/Pagination'
-    TemplateResponse:
-      description: A template.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Template'
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Deleted:
-      description: The resource was removed.
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad Request - validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
