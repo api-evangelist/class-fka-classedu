@@ -120,79 +120,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    TemplateResponse:
-      description: A template.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Template'
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad Request - validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Deleted:
-      description: The resource was removed.
-    TemplateListResponse:
-      description: A page of templates.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Template'
-              pagination:
-                $ref: '#/components/schemas/Pagination'
-  parameters:
-    TemplateId:
-      name: template_id
-      in: query
-      description: Template identifier.
-      required: false
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      description: Records per page (1-1000).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
-        default: 100
-    Page:
-      name: page
-      in: query
-      description: Page number to retrieve (positive integer).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
   schemas:
     Pagination:
       type: object
@@ -211,17 +138,12 @@ components:
           type:
           - integer
           - 'null'
-    TemplateCreate:
+    Error:
       type: object
-      required:
-      - name
       properties:
-        name:
+        message:
           type: string
-        description:
-          type: string
-        status:
-          type: string
+          description: Human-readable explanation of the failure.
     Template:
       type: object
       properties:
@@ -233,12 +155,90 @@ components:
           type: string
         status:
           type: string
-    Error:
+    TemplateCreate:
       type: object
+      required:
+      - name
       properties:
-        message:
+        name:
           type: string
-          description: Human-readable explanation of the failure.
+        description:
+          type: string
+        status:
+          type: string
+  responses:
+    TemplateListResponse:
+      description: A page of templates.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Template'
+              pagination:
+                $ref: '#/components/schemas/Pagination'
+    Deleted:
+      description: The resource was removed.
+    TemplateResponse:
+      description: A template.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Template'
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    TemplateId:
+      name: template_id
+      in: query
+      description: Template identifier.
+      required: false
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      description: Page number to retrieve (positive integer).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    Limit:
+      name: limit
+      in: query
+      description: Records per page (1-1000).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 100
   securitySchemes:
     bearerAuth:
       type: http

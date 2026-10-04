@@ -142,20 +142,6 @@ components:
           type: string
         display_name:
           type: string
-    Enrollment:
-      type: object
-      properties:
-        student_id:
-          type: string
-        ext_person_id:
-          type: string
-        email:
-          type: string
-          format: email
-        class_id:
-          type: string
-        role:
-          type: string
     Pagination:
       type: object
       properties:
@@ -179,13 +165,75 @@ components:
         message:
           type: string
           description: Human-readable explanation of the failure.
+    Enrollment:
+      type: object
+      properties:
+        student_id:
+          type: string
+        ext_person_id:
+          type: string
+        email:
+          type: string
+          format: email
+        class_id:
+          type: string
+        role:
+          type: string
+  parameters:
+    ExtClassId:
+      name: ext_class_id
+      in: query
+      description: External class identifier supplied by the integrator.
+      required: false
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      description: Page number to retrieve (positive integer).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    ClassId:
+      name: class_id
+      in: query
+      description: Class identifier assigned by Class.
+      required: false
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: Records per page (1-1000).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 100
   responses:
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
+    Deleted:
+      description: The resource was removed.
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    EnrollmentResponse:
+      description: An enrollment.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Enrollment'
     NotFound:
       description: Not Found.
       content:
@@ -205,60 +253,12 @@ components:
                   $ref: '#/components/schemas/Enrollment'
               pagination:
                 $ref: '#/components/schemas/Pagination'
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad Request - validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Deleted:
-      description: The resource was removed.
-    EnrollmentResponse:
-      description: An enrollment.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Enrollment'
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      description: Records per page (1-1000).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
-        default: 100
-    ClassId:
-      name: class_id
-      in: query
-      description: Class identifier assigned by Class.
-      required: false
-      schema:
-        type: string
-    ExtClassId:
-      name: ext_class_id
-      in: query
-      description: External class identifier supplied by the integrator.
-      required: false
-      schema:
-        type: string
-    Page:
-      name: page
-      in: query
-      description: Page number to retrieve (positive integer).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
   securitySchemes:
     bearerAuth:
       type: http

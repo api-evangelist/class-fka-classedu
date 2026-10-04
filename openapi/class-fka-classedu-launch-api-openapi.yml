@@ -50,25 +50,35 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable explanation of the failure.
+    Launch:
+      type: object
+      properties:
+        launch_url:
+          type: string
+          format: uri
+  parameters:
+    ExtClassId:
+      name: ext_class_id
+      in: query
+      description: External class identifier supplied by the integrator.
+      required: false
+      schema:
+        type: string
+    ClassId:
+      name: class_id
+      in: query
+      description: Class identifier assigned by Class.
+      required: false
+      schema:
+        type: string
   responses:
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    LaunchResponse:
-      description: A learner launch link.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Launch'
-    NotFound:
-      description: Not Found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Unauthorized - missing or invalid API key.
       content:
@@ -81,34 +91,24 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  schemas:
-    Launch:
-      type: object
-      properties:
-        launch_url:
-          type: string
-          format: uri
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable explanation of the failure.
-  parameters:
-    ClassId:
-      name: class_id
-      in: query
-      description: Class identifier assigned by Class.
-      required: false
-      schema:
-        type: string
-    ExtClassId:
-      name: ext_class_id
-      in: query
-      description: External class identifier supplied by the integrator.
-      required: false
-      schema:
-        type: string
+    NotFound:
+      description: Not Found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    LaunchResponse:
+      description: A learner launch link.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Launch'
   securitySchemes:
     bearerAuth:
       type: http

@@ -72,31 +72,6 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
 components:
-  responses:
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ReportResponse:
-      description: A reporting result set.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Report'
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad Request - validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     Pagination:
       type: object
@@ -115,6 +90,12 @@ components:
           type:
           - integer
           - 'null'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable explanation of the failure.
     Report:
       type: object
       properties:
@@ -125,13 +106,14 @@ components:
             additionalProperties: true
         pagination:
           $ref: '#/components/schemas/Pagination'
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable explanation of the failure.
   parameters:
+    ExtClassId:
+      name: ext_class_id
+      in: query
+      description: External class identifier supplied by the integrator.
+      required: false
+      schema:
+        type: string
     ClassId:
       name: class_id
       in: query
@@ -148,13 +130,6 @@ components:
         type: integer
         minimum: 1
         default: 1
-    ExtClassId:
-      name: ext_class_id
-      in: query
-      description: External class identifier supplied by the integrator.
-      required: false
-      schema:
-        type: string
     Limit:
       name: limit
       in: query
@@ -165,6 +140,31 @@ components:
         minimum: 1
         maximum: 1000
         default: 100
+  responses:
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ReportResponse:
+      description: A reporting result set.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Report'
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
