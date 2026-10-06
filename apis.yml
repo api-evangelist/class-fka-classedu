@@ -47,7 +47,7 @@ accessModel:
   method: derived
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-18'
+modified: '2026-10-06'
 image: https://www.class.com/wp-content/uploads/2022/12/class_logo.svg
 tags:
 - Company
@@ -173,6 +173,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- url: https://www.class.com/blog/feed/
+  type: BlogRSS
 - type: TrustCenter
   url: security/class-fka-classedu-trust-center.yml
 - type: DomainSecurity
