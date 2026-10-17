@@ -97,24 +97,53 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request - validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Deleted:
+      description: The resource was removed.
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UserResponse:
+      description: A user.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+    NotFound:
+      description: Not Found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UserListResponse:
+      description: A page of users.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+              pagination:
+                $ref: '#/components/schemas/Pagination'
   schemas:
-    Pagination:
-      type: object
-      properties:
-        total_records:
-          type: integer
-        current_page:
-          type: integer
-        total_pages:
-          type: integer
-        next_page:
-          type:
-          - integer
-          - 'null'
-        prev_page:
-          type:
-          - integer
-          - 'null'
     Error:
       type: object
       properties:
@@ -137,6 +166,23 @@ components:
           type: array
           items:
             type: string
+    Pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+        current_page:
+          type: integer
+        total_pages:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
     UserUpsert:
       type: object
       properties:
@@ -157,17 +203,27 @@ components:
           items:
             type: string
   parameters:
-    ExtUserId:
-      name: ext_user_id
-      in: query
-      description: External user identifier supplied by the integrator.
-      required: false
-      schema:
-        type: string
     UserId:
       name: id
       in: query
       description: User identifier assigned by Class.
+      required: false
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: Records per page (1-1000).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 100
+    ExtUserId:
+      name: ext_user_id
+      in: query
+      description: External user identifier supplied by the integrator.
       required: false
       schema:
         type: string
@@ -180,62 +236,6 @@ components:
         type: integer
         minimum: 1
         default: 1
-    Limit:
-      name: limit
-      in: query
-      description: Records per page (1-1000).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
-        default: 100
-  responses:
-    Deleted:
-      description: The resource was removed.
-    UserResponse:
-      description: A user.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/User'
-    UserListResponse:
-      description: A page of users.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'
-              pagination:
-                $ref: '#/components/schemas/Pagination'
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad Request - validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

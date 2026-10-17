@@ -142,23 +142,6 @@ components:
           type: string
         display_name:
           type: string
-    Pagination:
-      type: object
-      properties:
-        total_records:
-          type: integer
-        current_page:
-          type: integer
-        total_pages:
-          type: integer
-        next_page:
-          type:
-          - integer
-          - 'null'
-        prev_page:
-          type:
-          - integer
-          - 'null'
     Error:
       type: object
       properties:
@@ -179,63 +162,34 @@ components:
           type: string
         role:
           type: string
-  parameters:
-    ExtClassId:
-      name: ext_class_id
-      in: query
-      description: External class identifier supplied by the integrator.
-      required: false
-      schema:
-        type: string
-    Page:
-      name: page
-      in: query
-      description: Page number to retrieve (positive integer).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    ClassId:
-      name: class_id
-      in: query
-      description: Class identifier assigned by Class.
-      required: false
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      description: Records per page (1-1000).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
-        default: 100
+    Pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+        current_page:
+          type: integer
+        total_pages:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
   responses:
-    Deleted:
-      description: The resource was removed.
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Bad Request - validation failed.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    EnrollmentResponse:
-      description: An enrollment.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Enrollment'
-    NotFound:
-      description: Not Found.
+    Deleted:
+      description: The resource was removed.
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
       content:
         application/json:
           schema:
@@ -253,12 +207,58 @@ components:
                   $ref: '#/components/schemas/Enrollment'
               pagination:
                 $ref: '#/components/schemas/Pagination'
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
+    NotFound:
+      description: Not Found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    EnrollmentResponse:
+      description: An enrollment.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Enrollment'
+  parameters:
+    ClassId:
+      name: class_id
+      in: query
+      description: Class identifier assigned by Class.
+      required: false
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: Records per page (1-1000).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 100
+    ExtClassId:
+      name: ext_class_id
+      in: query
+      description: External class identifier supplied by the integrator.
+      required: false
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      description: Page number to retrieve (positive integer).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
   securitySchemes:
     bearerAuth:
       type: http

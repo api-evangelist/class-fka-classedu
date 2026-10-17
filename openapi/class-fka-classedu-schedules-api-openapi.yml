@@ -96,29 +96,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Pagination:
-      type: object
-      properties:
-        total_records:
-          type: integer
-        current_page:
-          type: integer
-        total_pages:
-          type: integer
-        next_page:
-          type:
-          - integer
-          - 'null'
-        prev_page:
-          type:
-          - integer
-          - 'null'
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable explanation of the failure.
     Schedule:
       type: object
       properties:
@@ -132,6 +109,12 @@ components:
           type: integer
         end_time:
           type: integer
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable explanation of the failure.
     ScheduleCreate:
       type: object
       required:
@@ -151,7 +134,48 @@ components:
           type: string
           deprecated: true
           description: Time Zone ID (deprecated).
+    Pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+        current_page:
+          type: integer
+        total_pages:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
   parameters:
+    ScheduleId:
+      name: schedule_id
+      in: query
+      description: Schedule (class date) identifier.
+      required: false
+      schema:
+        type: string
+    ClassId:
+      name: class_id
+      in: query
+      description: Class identifier assigned by Class.
+      required: false
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: Records per page (1-1000).
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 100
     ExtClassId:
       name: ext_class_id
       in: query
@@ -168,53 +192,17 @@ components:
         type: integer
         minimum: 1
         default: 1
-    ClassId:
-      name: class_id
-      in: query
-      description: Class identifier assigned by Class.
-      required: false
-      schema:
-        type: string
-    ScheduleId:
-      name: schedule_id
-      in: query
-      description: Schedule (class date) identifier.
-      required: false
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      description: Records per page (1-1000).
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
-        default: 100
   responses:
-    Deleted:
-      description: The resource was removed.
-    Unauthorized:
-      description: Unauthorized - missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ScheduleResponse:
-      description: A class date.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Schedule'
     BadRequest:
       description: Bad Request - validation failed.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found.
+    Deleted:
+      description: The resource was removed.
+    Forbidden:
+      description: Forbidden - the API key lacks the required scope.
       content:
         application/json:
           schema:
@@ -232,12 +220,24 @@ components:
                   $ref: '#/components/schemas/Schedule'
               pagination:
                 $ref: '#/components/schemas/Pagination'
-    Forbidden:
-      description: Forbidden - the API key lacks the required scope.
+    NotFound:
+      description: Not Found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ScheduleResponse:
+      description: A class date.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Schedule'
   securitySchemes:
     bearerAuth:
       type: http
