@@ -64,6 +64,130 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Class (fka ClassEDU) is a company surfaced as a portfolio company of insight-partners and added to the API Evangelist network as a stub for enrichment. Sector: education. This profile is a lead awaiting the enrichment pipeline.
+Class (fka ClassEDU) is a virtual classroom platform, founded in 2020 by education-technology leader Michael Chasen, that adds a full teaching and learning layer on top of Zoom and Microsoft Teams for K-12, higher education, government, and corporate training. The platform provides interactive course setup and templates, real-time engagement analytics and attendance tracking, enhanced breakout rooms, polls, whiteboards, auto transcription, an AI assistant, proctoring, and LMS integrations. Class also publishes a REST developer API (developer.class.com) that lets administrators and integrators provision classes, manage enrollments, generate learner launch links, schedule class dates, manage class templates, manage non-learner users, and pull attendance and engagement reporting, authenticated with a per-organization API key presented as a Bearer token and gated by permission scopes.
 
-Backed by: insight-partners — https://www.class.com/
+**Areas:** Company · Education · EdTech · Virtual Classroom · LMS · E-Learning · Training · Zoom · Microsoft Teams · Attendance
+
+## Class (fka ClassEDU) on APIs.io
+
+Everything profiled for Class (fka ClassEDU) is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/class-fka-classedu/](https://apis.io/providers/class-fka-classedu/)** — or go straight to one of the APIs or properties below.
+
+### APIs (7)
+
+- [Class (fka ClassEDU) Classes API](https://apis.io/apis/class-fka-classedu/class-fka-classedu-classes-api/) — Create, read, update and remove classes.
+- [Class (fka ClassEDU) Enrollments API](https://apis.io/apis/class-fka-classedu/class-fka-classedu-enrollments-api/) — Enroll learners into classes and manage their enrollment records.
+- [Class (fka ClassEDU) Launch API](https://apis.io/apis/class-fka-classedu/class-fka-classedu-launch-api/) — Generate a one-time access link for a learner to join a class.
+- [Class (fka ClassEDU) Reporting API](https://apis.io/apis/class-fka-classedu/class-fka-classedu-reporting-api/) — Attendance and engagement metrics reporting.
+- [Class (fka ClassEDU) Schedules API](https://apis.io/apis/class-fka-classedu/class-fka-classedu-schedules-api/) — Manage the scheduled dates (sessions) for a class.
+- [Class (fka ClassEDU) Templates API](https://apis.io/apis/class-fka-classedu/class-fka-classedu-templates-api/) — Manage reusable class templates.
+- [Class (fka ClassEDU) Users API](https://apis.io/apis/class-fka-classedu/class-fka-classedu-users-api/) — Manage non-learner users (instructors, admins).
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [class-fka-classedu](https://apis.io/servers/class-fka-classedu/class-fka-classedu/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Class Fka Classedu Agentic Access](https://apis.io/agentic-access/class-fka-classedu/class-fka-classedu-agentic-access/)
+
+#### Collections (7)
+
+Postman and Open Collection request collections.
+
+- [Class Developer Classes API](https://apis.io/collections/class-fka-classedu/open-class-fka-classedu-classes-api/)
+- [Class Developer Classes Enrollments API](https://apis.io/collections/class-fka-classedu/open-class-fka-classedu-enrollments-api/)
+- [Class Developer Classes Launch API](https://apis.io/collections/class-fka-classedu/open-class-fka-classedu-launch-api/)
+- [Class Developer Classes Reporting API](https://apis.io/collections/class-fka-classedu/open-class-fka-classedu-reporting-api/)
+- [Class Developer Classes Schedules API](https://apis.io/collections/class-fka-classedu/open-class-fka-classedu-schedules-api/)
+- [Class Developer Classes Templates API](https://apis.io/collections/class-fka-classedu/open-class-fka-classedu-templates-api/)
+- [Class Developer Classes Users API](https://apis.io/collections/class-fka-classedu/open-class-fka-classedu-users-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Class Fka Classedu Openapi Overlay](https://apis.io/overlays/class-fka-classedu/class-fka-classedu-openapi-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Class Fka Classedu Authentication](https://apis.io/security/class-fka-classedu/class-fka-classedu-authentication/)
+- [Class Fka Classedu Domain Security](https://apis.io/security/class-fka-classedu/class-fka-classedu-domain-security/)
+- [Class Fka Classedu Trust Center](https://apis.io/security/class-fka-classedu/class-fka-classedu-trust-center/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.class.com/)
+- [Documentation](https://developer.class.com/)
+- [API reference](https://developer.class.com/)
+- [Support](https://support.class.com/)
+- [Blog](https://www.class.com/blog/)
+- [Compliance](https://trust.class.com/)
+- [Trust centre](https://trust.class.com/)
+- [Terms of service](https://www.class.com/terms-of-service/)
+- [Privacy policy](https://www.class.com/privacy-policy/)
+- [Status](https://status.class.com/)
+
+## API Evangelist rating
+
+**Kin Score 33.6** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 16.9 |
+| Contract governance | 4.5 |
+| Operational transparency | 15.8 |
+| Developer ergonomics | 44.6 |
+| Access clarity | 36.8 |
+
+**Agent readiness 21.0** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 29.4** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/class-fka-classedu/](https://apis.io/providers/class-fka-classedu/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Class (fka ClassEDU): the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/class-fka-classedu/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
